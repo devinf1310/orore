@@ -337,21 +337,25 @@ main { padding: 2rem 0 4rem; }
 .world-map-wrapper svg {
   width: 100%;
   height: auto;
+  display: block;
 }
 .world-map-wrapper .country {
-  fill: #d8cdb5;
+  fill: #e0d6c0;
   stroke: #b8a980;
-  stroke-width: 0.5;
-  transition: fill 0.2s var(--ease);
+  stroke-width: 0.4;
+  stroke-linejoin: round;
+  transition: fill 0.25s var(--ease);
 }
 .world-map-wrapper .country.available {
-  fill: var(--ochre-soft);
-  stroke: var(--ochre);
-  stroke-width: 1.5;
+  fill: var(--ochre);
+  stroke: var(--ochre-dark);
+  stroke-width: 1;
   cursor: pointer;
+  filter: drop-shadow(0 2px 4px rgba(154, 95, 26, 0.3));
 }
 .world-map-wrapper .country.available:hover {
-  fill: var(--ochre);
+  fill: var(--ochre-dark);
+  filter: drop-shadow(0 4px 8px rgba(154, 95, 26, 0.5));
 }
 .country-tooltip {
   position: absolute;
@@ -452,7 +456,41 @@ main { padding: 2rem 0 4rem; }
   position: relative;
   min-height: 500px;
 }
-.china-map-container svg { width: 100%; height: auto; }
+.china-map-container svg { width: 100%; height: auto; display: block; }
+
+/* Pays voisins (contexte autour de la Chine) */
+.china-map-container .neighbor {
+  fill: #e8dec9;
+  stroke: #c4b690;
+  stroke-width: 0.4;
+  opacity: 0.7;
+}
+
+/* La Chine elle-même : territoire principal en ocre */
+.china-map-container .china-territory {
+  fill: var(--ochre-soft);
+  stroke: var(--ochre-dark);
+  stroke-width: 1.2;
+  filter: drop-shadow(0 2px 6px rgba(154, 95, 26, 0.25));
+}
+
+/* Étiquettes pays voisins (très discrètes) */
+.china-map-container .label-country {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13px;
+  fill: #8a7556;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.china-map-container .label-sea {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 12px;
+  fill: #5a7a93;
+  opacity: 0.7;
+  pointer-events: none;
+}
 
 .hotspot-marker {
   cursor: pointer;
