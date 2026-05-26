@@ -84,6 +84,21 @@ h4 { font-size: 1.15rem; font-weight: 600; }
 /* Italique élégant de Fraunces */
 .display-italic { font-family: var(--font-display); font-style: italic; font-weight: 300; }
 
+/* Twemoji : rendu uniforme des emojis comme images SVG */
+img.emoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+  display: inline-block;
+}
+.subject-icon img.emoji,
+.tradition-card .icon img.emoji,
+.key-fact .icon img.emoji {
+  height: 1em;
+  width: 1em;
+}
+
 /* ---------- 5. LAYOUT GÉNÉRAL ---------- */
 .container {
   max-width: var(--container);
