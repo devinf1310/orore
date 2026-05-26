@@ -494,17 +494,21 @@ main { padding: 2rem 0 4rem; }
 
 .hotspot-marker {
   cursor: pointer;
-  transition: transform 0.2s var(--ease);
-  transform-origin: center;
-  transform-box: fill-box;
 }
-.hotspot-marker:hover { transform: scale(1.3); }
-.hotspot-marker.active circle.inner { fill: var(--ochre); }
+.hotspot-marker circle.inner,
+.hotspot-marker circle.outer {
+  transition: r 0.2s var(--ease), fill 0.2s var(--ease);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.hotspot-marker:hover circle.inner { r: 9; fill: var(--ochre-dark); }
+.hotspot-marker:hover circle.outer { r: 18; opacity: 0.45; }
+.hotspot-marker.active circle.inner { fill: var(--ochre); r: 9; }
+.hotspot-marker.active circle.outer { opacity: 0.5; }
 
 .hotspot-marker circle.outer {
   fill: var(--ochre);
   opacity: 0.25;
-  animation: pulse 2s infinite;
 }
 .hotspot-marker circle.inner {
   fill: var(--terracotta);
@@ -513,15 +517,22 @@ main { padding: 2rem 0 4rem; }
 }
 .hotspot-marker text {
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   fill: var(--ink);
   text-anchor: middle;
   pointer-events: none;
+  paint-order: stroke;
+  stroke: var(--cream);
+  stroke-width: 3;
+  stroke-linejoin: round;
 }
 @keyframes pulse {
-  0%, 100% { opacity: 0.25; r: 12; }
-  50% { opacity: 0.05; r: 22; }
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.05; }
+}
+.hotspot-marker circle.outer {
+  animation: pulse 2.5s infinite ease-in-out;
 }
 
 /* Panel contenu hotspot */
