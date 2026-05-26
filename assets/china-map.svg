@@ -46,7 +46,7 @@
   <circle class="inner" r="7"/>
   <text dy="-18">Hong Kong</text>
 </g>
-<g class="hotspot-marker" data-hotspot-id="gobi" transform="translate(483.9,208.1)">
+<g class="hotspot-marker" data-hotspot-id="gobi" transform="translate(532.3,245.9)">
   <circle class="outer" r="14"/>
   <circle class="inner" r="7"/>
   <text dy="-18">Désert de Gobi</text>
