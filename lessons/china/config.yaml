@@ -1,0 +1,463 @@
+lesson:
+  id: china
+  subject: geographie
+  title: "La Chine"
+  level: cm2
+  duration_minutes: 15
+  agent_name: "Orore"
+
+  # ============================================================
+  # INTRODUCTION
+  # ============================================================
+  intro:
+    headline: "Bienvenue en Chine !"
+    subtitle: "Un voyage à travers le plus grand pays d'Asie"
+    flag_emoji: "🇨🇳"
+    key_facts:
+      - icon: "👥"
+        label: "Habitants"
+        value: "1,4 milliard"
+        comment: "20 fois plus qu'en France"
+      - icon: "🏛️"
+        label: "Capitale"
+        value: "Pékin"
+      - icon: "📏"
+        label: "Superficie"
+        value: "9,6 millions de km²"
+        comment: "17 fois la France"
+      - icon: "🗣️"
+        label: "Langue"
+        value: "Mandarin"
+        comment: "La langue la plus parlée au monde"
+      - icon: "💰"
+        label: "Monnaie"
+        value: "Yuan (¥)"
+      - icon: "🏔️"
+        label: "Point culminant"
+        value: "Mont Everest (8 849 m)"
+        comment: "Frontière avec le Népal"
+
+  # ============================================================
+  # HOTSPOTS SUR LA CARTE
+  # ============================================================
+  hotspots:
+    - id: pekin
+      name: "Pékin"
+      chinese_name: "北京"
+      pinyin: "Běijīng"
+      coordinates: {x: 720, y: 220}
+      type: "capitale"
+      images:
+        - file: "cite_interdite.jpg"
+          credit: "Wikimedia Commons"
+          caption: "La Cité Interdite, ancien palais des empereurs"
+        - file: "place_tiananmen.jpg"
+          credit: "Wikimedia Commons"
+          caption: "La place Tian'anmen, plus grande place du monde"
+      content:
+        title: "Pékin, la capitale"
+        intro: "Pékin est la capitale de la Chine depuis 1949. Plus de 21 millions de personnes y vivent, c'est trois fois la population de Paris !"
+        key_points:
+          - "Capitale politique de la Chine depuis 1949"
+          - "21 millions d'habitants (3 fois Paris)"
+          - "La Cité Interdite : ancien palais des empereurs avec 9 999 pièces"
+          - "La place Tian'anmen : plus grande place publique du monde"
+          - "JO de 2008 et 2022 organisés ici"
+        anecdote: "On l'appelle 'Cité Interdite' parce que personne ne pouvait y entrer sans la permission de l'empereur. Il y vivait avec sa famille et 8 700 serviteurs !"
+
+    - id: shanghai
+      name: "Shanghai"
+      chinese_name: "上海"
+      pinyin: "Shànghǎi"
+      coordinates: {x: 780, y: 360}
+      type: "ville"
+      images:
+        - file: "shanghai_skyline.jpg"
+          credit: "Wikimedia Commons"
+          caption: "Les gratte-ciels du quartier de Pudong"
+      content:
+        title: "Shanghai, la ville moderne"
+        intro: "Shanghai est la plus grande ville de Chine et l'une des plus grandes au monde. C'est le cœur économique du pays."
+        key_points:
+          - "26 millions d'habitants : ville la plus peuplée du pays"
+          - "Premier port mondial pour le commerce"
+          - "Tour Shanghai : 632 m, 2e plus haute tour du monde"
+          - "Connue pour ses gratte-ciels futuristes"
+        anecdote: "Le métro de Shanghai est le plus grand du monde : il fait plus de 800 km, soit la distance de Paris à Marseille !"
+
+    - id: xian
+      name: "Xi'an"
+      chinese_name: "西安"
+      pinyin: "Xī'ān"
+      coordinates: {x: 660, y: 320}
+      type: "ville_historique"
+      images:
+        - file: "armee_terre_cuite.jpg"
+          credit: "Wikimedia Commons"
+          caption: "L'armée de terre cuite, gardienne du tombeau de l'empereur Qin"
+      content:
+        title: "Xi'an et l'armée de terre cuite"
+        intro: "Xi'an est l'une des plus anciennes villes de Chine. C'était le point de départ de la Route de la Soie."
+        key_points:
+          - "Ancienne capitale de la Chine pendant plus de 1 000 ans"
+          - "Point de départ de la Route de la Soie vers l'Europe"
+          - "Armée de terre cuite : 8 000 soldats grandeur nature en terre cuite"
+          - "Construite il y a 2 200 ans pour protéger l'empereur Qin dans l'au-delà"
+        anecdote: "L'armée de terre cuite a été découverte par hasard en 1974 par des paysans qui creusaient un puits ! Chaque soldat a un visage différent."
+
+    - id: muraille
+      name: "Grande Muraille"
+      chinese_name: "长城"
+      pinyin: "Chángchéng"
+      coordinates: {x: 700, y: 200}
+      type: "monument"
+      images:
+        - file: "grande_muraille.jpg"
+          credit: "Wikimedia Commons"
+          caption: "La Grande Muraille s'étend sur des milliers de kilomètres"
+      content:
+        title: "La Grande Muraille de Chine"
+        intro: "C'est le plus long monument construit par les humains. On dit qu'on pourrait la voir depuis la Lune... mais c'est une légende !"
+        key_points:
+          - "Plus de 21 000 km de long (la moitié du tour de la Terre)"
+          - "Construite sur plus de 2 000 ans, du 7e siècle avant J-C au 17e siècle"
+          - "Servait à protéger la Chine des invasions du Nord"
+          - "Il faudrait 18 mois à pied pour la parcourir entièrement"
+          - "Classée au patrimoine mondial de l'UNESCO"
+        anecdote: "Une vieille croyance dit qu'on peut voir la Grande Muraille depuis la Lune. C'est FAUX ! Les astronautes ont confirmé qu'on ne la voit pas à l'œil nu depuis l'espace."
+
+    - id: yangtsé
+      name: "Yangtsé"
+      chinese_name: "长江"
+      pinyin: "Chángjiāng"
+      coordinates: {x: 700, y: 380}
+      type: "fleuve"
+      images:
+        - file: "yangtse.jpg"
+          credit: "Wikimedia Commons"
+          caption: "Le Yangtsé traverse la Chine d'ouest en est"
+      content:
+        title: "Le Yangtsé, le grand fleuve"
+        intro: "Le Yangtsé est le plus long fleuve d'Asie et le 3e plus long du monde. Son nom chinois signifie 'long fleuve'."
+        key_points:
+          - "6 380 km de long (la France fait 1 000 km de large)"
+          - "3e fleuve le plus long du monde après le Nil et l'Amazone"
+          - "Le barrage des Trois-Gorges : le plus grand barrage du monde"
+          - "Traverse 11 régions de Chine"
+          - "Source d'eau pour 400 millions de personnes"
+        anecdote: "Le barrage des Trois-Gorges produit autant d'électricité que 18 centrales nucléaires. C'est tellement énorme qu'il a ralenti la rotation de la Terre... de 0,06 microseconde !"
+
+    - id: tibet
+      name: "Tibet (Lhassa)"
+      chinese_name: "拉萨"
+      pinyin: "Lāsà"
+      coordinates: {x: 540, y: 320}
+      type: "region_montagne"
+      images:
+        - file: "potala.jpg"
+          credit: "Wikimedia Commons"
+          caption: "Le palais du Potala à Lhassa, ancienne résidence du Dalaï-Lama"
+      content:
+        title: "Le Tibet, le toit du monde"
+        intro: "Le Tibet est une région montagneuse de Chine, située à 4 000 mètres d'altitude en moyenne. On l'appelle 'le toit du monde'."
+        key_points:
+          - "Altitude moyenne : 4 500 m (Mont Blanc = 4 808 m)"
+          - "Capitale Lhassa, ville la plus haute du monde habitée"
+          - "Le palais du Potala : 1 000 pièces, construit en 1645"
+          - "Région du bouddhisme tibétain"
+          - "L'air y contient moins d'oxygène : on a vite le souffle court !"
+        anecdote: "Le palais du Potala est si haut qu'il fallait 50 ans pour le construire. Les ouvriers ne pouvaient travailler que quelques heures par jour à cause du manque d'oxygène."
+
+    - id: hongkong
+      name: "Hong Kong"
+      chinese_name: "香港"
+      pinyin: "Xiānggǎng"
+      coordinates: {x: 730, y: 480}
+      type: "ville_speciale"
+      images:
+        - file: "hongkong.jpg"
+          credit: "Wikimedia Commons"
+          caption: "Hong Kong et ses gratte-ciels la nuit"
+      content:
+        title: "Hong Kong, la ville-monde"
+        intro: "Hong Kong est une ville chinoise très particulière. Pendant 150 ans, elle a appartenu aux Anglais avant de redevenir chinoise en 1997."
+        key_points:
+          - "7,5 millions d'habitants"
+          - "Colonie britannique de 1842 à 1997"
+          - "Île tropicale : il fait chaud toute l'année"
+          - "Plus grande densité de gratte-ciels au monde"
+          - "Son nom signifie 'port parfumé' en chinois"
+        anecdote: "À Hong Kong, on roule à gauche comme en Angleterre, alors qu'en Chine continentale on roule à droite. Un héritage de l'époque britannique !"
+
+    - id: gobi
+      name: "Désert de Gobi"
+      chinese_name: "戈壁"
+      pinyin: "Gēbì"
+      coordinates: {x: 620, y: 200}
+      type: "desert"
+      images:
+        - file: "gobi.jpg"
+          credit: "Wikimedia Commons"
+          caption: "Les paysages du désert de Gobi"
+      content:
+        title: "Le désert de Gobi"
+        intro: "Le désert de Gobi est l'un des plus grands déserts du monde. Mais attention, c'est un désert froid, pas un désert chaud comme le Sahara !"
+        key_points:
+          - "1,3 million de km² : 2 fois la France"
+          - "Désert froid : -40°C en hiver, +45°C en été"
+          - "Très peu de sable, surtout des rochers et des steppes"
+          - "Plus grande réserve de dinosaures fossiles au monde"
+          - "Traversé par l'ancienne Route de la Soie"
+        anecdote: "On a trouvé dans le désert de Gobi les premiers œufs de dinosaures de l'histoire ! Des milliers de fossiles y dorment encore."
+
+  # ============================================================
+  # PRONONCIATIONS CHINOISES
+  # ============================================================
+  pronunciations:
+    - french: "Bonjour"
+      chinese: "你好"
+      pinyin: "Nǐ hǎo"
+      audio: "nihao.mp3"
+    - french: "Merci"
+      chinese: "谢谢"
+      pinyin: "Xièxie"
+      audio: "xiexie.mp3"
+    - french: "Au revoir"
+      chinese: "再见"
+      pinyin: "Zàijiàn"
+      audio: "zaijian.mp3"
+    - french: "Chine"
+      chinese: "中国"
+      pinyin: "Zhōngguó"
+      audio: "zhongguo.mp3"
+      note: "Signifie littéralement 'pays du milieu'"
+    - french: "Comment t'appelles-tu ?"
+      chinese: "你叫什么名字？"
+      pinyin: "Nǐ jiào shénme míngzi?"
+      audio: "comment_tappelles.mp3"
+    - french: "Un, deux, trois"
+      chinese: "一, 二, 三"
+      pinyin: "Yī, èr, sān"
+      audio: "123.mp3"
+
+  # ============================================================
+  # TIMELINE HISTORIQUE
+  # ============================================================
+  timeline:
+    - year: -2070
+      label: "Première dynastie"
+      event: "La dynastie Xia : la civilisation chinoise commence à s'organiser autour du Fleuve Jaune"
+    - year: -221
+      label: "Unification"
+      event: "L'empereur Qin Shi Huang unifie la Chine pour la première fois. Il fait construire la première version de la Grande Muraille."
+    - year: -130
+      label: "Route de la Soie"
+      event: "Ouverture de la Route de la Soie qui relie la Chine à l'Europe par les marchands"
+    - year: 1368
+      label: "Dynastie Ming"
+      event: "Début de la dynastie Ming : construction de la Cité Interdite et reconstruction de la Grande Muraille telle qu'on la voit aujourd'hui"
+    - year: 1842
+      label: "Guerres de l'opium"
+      event: "La Chine perd Hong Kong au profit de l'Angleterre après les guerres de l'opium"
+    - year: 1912
+      label: "Fin de l'Empire"
+      event: "La Chine devient une République après plus de 2 000 ans d'empereurs"
+    - year: 1949
+      label: "République populaire"
+      event: "Mao Zedong fonde la République populaire de Chine, encore en place aujourd'hui"
+    - year: 1997
+      label: "Retour de Hong Kong"
+      event: "Hong Kong redevient chinoise après 150 ans de colonisation anglaise"
+    - year: 2008
+      label: "JO de Pékin"
+      event: "La Chine organise ses premiers Jeux Olympiques d'été"
+
+  # ============================================================
+  # TRADITIONS & CULTURE
+  # ============================================================
+  traditions:
+    - id: nouvel_an
+      icon: "🧧"
+      title: "Le Nouvel An chinois"
+      description: "C'est la plus grande fête de l'année en Chine. Elle a lieu entre fin janvier et mi-février, à la nouvelle lune. La fête dure 15 jours ! Les familles se réunissent, on offre des enveloppes rouges remplies d'argent aux enfants, on lance des pétards pour chasser les mauvais esprits, et on danse avec d'immenses dragons et lions."
+      fun_fact: "Chaque année est associée à un animal du zodiaque chinois : rat, bœuf, tigre, lapin, dragon, serpent, cheval, chèvre, singe, coq, chien, cochon."
+
+    - id: ecriture
+      icon: "🖌️"
+      title: "L'écriture chinoise"
+      description: "Les Chinois n'utilisent pas un alphabet comme nous. Ils utilisent des caractères : chaque caractère représente un mot ou une idée. Il existe plus de 50 000 caractères ! Pour lire un journal, il faut en connaître environ 3 000."
+      fun_fact: "Le caractère pour 'forêt' (森) est composé de 3 fois le caractère 'arbre' (木). Le caractère pour 'bon' (好) est composé d'une femme (女) et d'un enfant (子) côte à côte."
+
+    - id: cuisine
+      icon: "🥟"
+      title: "La cuisine chinoise"
+      description: "La cuisine chinoise est l'une des plus variées au monde. Chaque région a ses spécialités. On mange avec des baguettes en bois, et beaucoup de plats se partagent en famille."
+      fun_fact: "Les nouilles ont été inventées en Chine il y a plus de 4 000 ans ! C'est Marco Polo qui les aurait ramenées en Italie au 13e siècle, où elles sont devenues les pâtes."
+
+    - id: animaux_symboles
+      icon: "🐉"
+      title: "Le panda et le dragon"
+      description: "Le panda géant est l'animal symbole de la Chine. Il ne vit qu'en Chine, surtout dans les montagnes du Sichuan. Il mange presque uniquement du bambou. Le dragon, lui, est un animal imaginaire très important : pour les Chinois, c'est un symbole de chance, de force et de sagesse (pas un monstre comme chez nous)."
+      fun_fact: "Il ne reste qu'environ 1 800 pandas géants sauvages dans le monde, tous en Chine. Le panda est l'animal le plus protégé du pays."
+
+    - id: arts
+      icon: "🎋"
+      title: "La calligraphie et l'art du thé"
+      description: "Deux arts traditionnels chinois sont la calligraphie (l'art de bien écrire les caractères au pinceau) et la cérémonie du thé. Préparer le thé est une vraie cérémonie qui demande des années d'apprentissage."
+
+  # ============================================================
+  # QUIZ
+  # ============================================================
+  quiz:
+    - question: "Combien d'habitants vivent en Chine ?"
+      options:
+        - "100 millions"
+        - "500 millions"
+        - "1,4 milliard"
+        - "5 milliards"
+      correct: 2
+      explanation: "1,4 milliard, soit 20 fois plus qu'en France !"
+
+    - question: "Quelle est la capitale de la Chine ?"
+      options:
+        - "Shanghai"
+        - "Pékin"
+        - "Hong Kong"
+        - "Xi'an"
+      correct: 1
+      explanation: "Pékin est la capitale depuis 1949."
+
+    - question: "Combien mesure la Grande Muraille ?"
+      options:
+        - "Environ 1 000 km"
+        - "Environ 5 000 km"
+        - "Plus de 21 000 km"
+        - "Plus de 100 000 km"
+      correct: 2
+      explanation: "Plus de 21 000 km, c'est la moitié du tour de la Terre !"
+
+    - question: "Comment dit-on 'bonjour' en chinois ?"
+      options:
+        - "Sayonara"
+        - "Nǐ hǎo"
+        - "Konnichiwa"
+        - "Salam"
+      correct: 1
+      explanation: "Nǐ hǎo signifie littéralement 'tu vas bien ?'"
+
+    - question: "Quel animal est le symbole de la Chine ?"
+      options:
+        - "Le tigre"
+        - "Le lion"
+        - "Le panda"
+        - "L'éléphant"
+      correct: 2
+      explanation: "Le panda géant ne vit qu'en Chine !"
+
+    - question: "Que signifie le nom 'Zhōngguó' (Chine en chinois) ?"
+      options:
+        - "Pays du soleil"
+        - "Pays du milieu"
+        - "Pays des dragons"
+        - "Pays de la soie"
+      correct: 1
+      explanation: "Les Chinois considéraient leur pays comme le centre du monde."
+
+  # ============================================================
+  # CONTEXTE COMPLET POUR Q&A AGENT IA
+  # Injecté dans le prompt système de GPT-4o-mini
+  # ============================================================
+  qa_context: |
+    CONTEXTE COMPLET SUR LA CHINE POUR RÉPONDRE AUX QUESTIONS DES ÉLÈVES :
+
+    GÉOGRAPHIE GÉNÉRALE
+    La Chine est le 3e plus grand pays du monde par sa superficie (9,6 millions de km², 17 fois la France), 
+    après la Russie et le Canada. Elle est située en Asie de l'Est. Elle a des frontières avec 14 pays : 
+    Russie, Mongolie, Kazakhstan, Kirghizstan, Tadjikistan, Afghanistan, Pakistan, Inde, Népal, Bhoutan, 
+    Birmanie, Laos, Vietnam, et Corée du Nord. La Chine a aussi 14 000 km de côtes sur l'océan Pacifique.
+
+    POPULATION
+    La Chine a 1,4 milliard d'habitants, c'est le 2e pays le plus peuplé après l'Inde. La plupart vivent 
+    dans l'est et le sud du pays. L'ouest est très peu peuplé à cause des montagnes et des déserts. 
+    La population vieillit beaucoup et le pays a moins de jeunes qu'avant.
+
+    LANGUE ET ÉCRITURE
+    La langue officielle est le mandarin, parlé par environ 1 milliard de personnes (la langue la plus 
+    parlée au monde). L'écriture utilise des caractères (pas un alphabet) : plus de 50 000 caractères 
+    existent, on en utilise 3 000 environ pour lire un journal. Pour aider à prononcer les caractères, 
+    on utilise le 'pinyin', une transcription avec notre alphabet latin et des accents pour les tons. 
+    En chinois, il y a 4 tons : la même syllabe prononcée différemment veut dire des choses différentes.
+
+    VILLES PRINCIPALES
+    - Pékin (Beijing) : capitale, 21 millions d'habitants, centre politique, Cité Interdite, place Tian'anmen
+    - Shanghai : 26 millions d'habitants, plus grande ville, centre économique, premier port mondial
+    - Hong Kong : 7,5 millions d'habitants, ancienne colonie britannique (1842-1997), statut spécial
+    - Xi'an : ancienne capitale, départ de la Route de la Soie, armée de terre cuite
+    - Canton (Guangzhou) : 15 millions, grande ville commerciale du sud
+    - Chengdu : célèbre pour ses pandas et sa cuisine épicée du Sichuan
+
+    MONUMENTS ET SITES
+    - La Grande Muraille : 21 196 km, construite sur 2 000 ans, classée UNESCO
+    - La Cité Interdite : palais des empereurs à Pékin, 9 999 pièces selon la légende, 720 000 m²
+    - L'armée de terre cuite à Xi'an : 8 000 soldats grandeur nature, découverte en 1974
+    - Le palais du Potala au Tibet : 1 000 pièces, à 3 700 m d'altitude
+    - Le barrage des Trois-Gorges : plus grand barrage du monde
+
+    HISTOIRE EN BREF
+    La civilisation chinoise est l'une des plus anciennes du monde, plus de 4 000 ans d'histoire. 
+    La Chine a été gouvernée par des empereurs pendant plus de 2 000 ans, regroupés en dynasties 
+    (Xia, Shang, Zhou, Qin, Han, Tang, Song, Yuan, Ming, Qing). En 1912, l'empire est tombé et la Chine 
+    est devenue une République. En 1949, Mao Zedong a fondé la République populaire de Chine, qui existe 
+    encore aujourd'hui. La Chine est dirigée par le Parti communiste chinois.
+
+    ÉCONOMIE
+    La Chine est la 2e économie mondiale, après les États-Unis. Elle est appelée 'l'usine du monde' 
+    car beaucoup de produits y sont fabriqués (jouets, téléphones, vêtements, etc.). Elle est très 
+    forte dans la technologie, le commerce et les infrastructures (trains, routes, ponts).
+
+    CULTURE ET TRADITIONS
+    - Nouvel An chinois : entre fin janvier et mi-février, dure 15 jours, enveloppes rouges (hongbao), 
+      pétards, danses du dragon et du lion. Chaque année a un animal du zodiaque.
+    - Fête de la mi-automne (septembre) : on mange des gâteaux de lune en regardant la pleine lune
+    - Fête des bateaux-dragons (juin) : courses de bateaux décorés en dragons
+    - Calligraphie : art de bien écrire au pinceau avec de l'encre
+    - Cérémonie du thé : tradition millénaire de préparation et dégustation du thé
+    - Arts martiaux : kung-fu, tai-chi, originaires de Chine
+    - Médecine chinoise : acupuncture, plantes médicinales
+
+    CUISINE
+    Très variée selon les régions. Spécialités : nouilles, raviolis (jiaozi), canard laqué, 
+    poulet du général Tao, riz cantonais, soupe au porc, légumes sautés au wok. 
+    On mange avec des baguettes. Les nouilles ont été inventées en Chine il y a plus de 4 000 ans.
+
+    NATURE ET ANIMAUX
+    Le panda géant est l'animal symbole, environ 1 800 individus sauvages restent, tous en Chine. 
+    Autres animaux : tigre de Sibérie, léopard des neiges, dragon (animal imaginaire symbole de chance), 
+    paon, grue. Paysages très variés : montagnes (Himalaya, Tibet), déserts (Gobi, Taklamakan), 
+    rizières en terrasses, forêts de bambous, fleuves (Yangtsé, Fleuve Jaune), îles tropicales (Hainan).
+
+    SCIENCES ET INVENTIONS CHINOISES
+    Les Chinois ont inventé beaucoup de choses : la boussole, la poudre à canon, le papier, l'imprimerie, 
+    la soie, le cerf-volant, le parapluie, la brouette, les pâtes (nouilles), le thé, la porcelaine, 
+    les feux d'artifice. Aujourd'hui la Chine est très avancée dans l'espace (taikonautes), 
+    les trains à grande vitesse, les voitures électriques.
+
+    DRAPEAU ET SYMBOLES
+    Le drapeau chinois est rouge avec 5 étoiles jaunes : une grande étoile représente le Parti communiste, 
+    et 4 petites représentent les classes sociales du peuple. Le rouge symbolise la révolution et la chance. 
+    Animal symbole : panda. Animal mythique : dragon.
+
+    SPORTS
+    La Chine a organisé les JO d'été de 2008 à Pékin et les JO d'hiver de 2022 (Pékin est la seule 
+    ville au monde à avoir organisé les deux). Sports populaires : tennis de table (sport national), 
+    badminton, gymnastique, arts martiaux, basket, football.
+
+    INSTRUCTIONS DE COMPORTEMENT POUR ORORE :
+    - Tu es Orore, une institutrice IA qui répond aux questions des camarades de classe après l'exposé sur la Chine.
+    - Niveau scolaire : CM2 (9-10 ans). Vocabulaire simple, phrases courtes, ton bienveillant.
+    - Réponds en 2-3 phrases maximum.
+    - Si la question sort du sujet de la Chine, dis : "Très bonne question ! Mais aujourd'hui nous parlons de la Chine. Demande à ta maîtresse !"
+    - Si tu ne connais pas la réponse, dis : "C'est une excellente question ! Je n'ai pas la réponse, mais ta maîtresse pourra t'aider à chercher."
+    - Ne donne JAMAIS de chiffres inventés. Si tu n'as pas le chiffre exact dans le contexte ci-dessus, dis "je ne sais pas exactement, mais c'est beaucoup/peu".
+    - Encourage les enfants : "Bonne question !", "Quelle bonne curiosité !"
+    - Ne parle JAMAIS de politique, de conflits actuels, ou de sujets sensibles. Reste sur la culture, l'histoire, la géographie.

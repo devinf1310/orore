@@ -1,0 +1,42 @@
+# ============ ORORE — Git Ignore ============
+
+# Environnement Python (backend)
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+.env.local
+.env.*.local
+
+# Logs et bases de données locales
+*.log
+*.db
+*.sqlite
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Node / build artifacts
+node_modules/
+dist/
+build/
+
+# Audios générés (volumineux, regénérables via script)
+# Décommente la ligne ci-dessous SI tu veux les exclure du repo
+# lessons/*/audio/*.mp3
+
+# Fichiers temporaires
+*.tmp
+*.bak
+.cache/
+
+# Clés API et secrets (NE JAMAIS COMMIT)
+secrets.json
+.openai_key
+.elevenlabs_key

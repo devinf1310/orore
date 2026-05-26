@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orore — L'apprentissage qui s'éveille</title>
+  <meta name="description" content="Outil pédagogique interactif pour exposés scolaires. L'enfant présente, Orore épaule.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <div class="brand-mark">Orore</div>
+        <div class="brand-tagline">l'apprentissage qui s'éveille</div>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="#matieres">Matières</a>
+        <a href="#apropos">À propos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- HERO -->
+      <section class="hero">
+        <span class="hero-eyebrow">Outil pédagogique interactif</span>
+        <h1>L'enfant présente. <em>Orore l'épaule.</em></h1>
+        <p class="hero-lead">
+          Un compagnon de classe qui transforme chaque exposé en une exploration vivante,
+          sans jamais prendre la parole à la place de l'enfant.
+        </p>
+        <div class="hero-divider"></div>
+      </section>
+
+      <!-- MATIÈRES -->
+      <section id="matieres">
+        <div class="section-title">
+          <h2>Choisis ta matière</h2>
+          <p class="subtitle">Sept disciplines à découvrir. Une déjà ouverte.</p>
+        </div>
+
+        <div class="subjects-grid">
+
+          <a href="geo.html" class="subject-card active">
+            <div class="subject-icon">🌍</div>
+            <div class="subject-name">Géographie</div>
+            <div class="subject-status available">Disponible</div>
+          </a>
+
+          <div class="subject-card locked">
+            <div class="subject-icon">📜</div>
+            <div class="subject-name">Histoire</div>
+            <div class="subject-status coming">Bientôt</div>
+          </div>
+
+          <div class="subject-card locked">
+            <div class="subject-icon">🔬</div>
+            <div class="subject-name">Sciences</div>
+            <div class="subject-status coming">Bientôt</div>
+          </div>
+
+          <div class="subject-card locked">
+            <div class="subject-icon">🧮</div>
+            <div class="subject-name">Mathématiques</div>
+            <div class="subject-status coming">Bientôt</div>
+          </div>
+
+          <div class="subject-card locked">
+            <div class="subject-icon">📖</div>
+            <div class="subject-name">Français</div>
+            <div class="subject-status coming">Bientôt</div>
+          </div>
+
+          <div class="subject-card locked">
+            <div class="subject-icon">🎨</div>
+            <div class="subject-name">Arts</div>
+            <div class="subject-status coming">Bientôt</div>
+          </div>
+
+          <div class="subject-card locked">
+            <div class="subject-icon">🗣️</div>
+            <div class="subject-name">Langues</div>
+            <div class="subject-status coming">Bientôt</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- COMMENT ÇA MARCHE -->
+      <section id="apropos" style="margin: 5rem 0 3rem;">
+        <div class="section-title">
+          <h2>Comment ça fonctionne ?</h2>
+          <p class="subtitle">Trois étapes simples, pensées pour la classe.</p>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 2rem 0;">
+          <div style="text-align:center;">
+            <div style="font-family: var(--font-display); font-size: 3rem; color: var(--ochre); margin-bottom: 0.5rem;">I.</div>
+            <h4 style="margin-bottom: 0.5rem;">L'enfant prépare</h4>
+            <p style="color: var(--ink-soft);">Avec sa fiche de prépa imprimable, l'enfant s'approprie le contenu et écrit son propre texte d'exposé.</p>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family: var(--font-display); font-size: 3rem; color: var(--ochre); margin-bottom: 0.5rem;">II.</div>
+            <h4 style="margin-bottom: 0.5rem;">L'enfant présente</h4>
+            <p style="color: var(--ink-soft);">Le site devient son support visuel. Il clique, montre, explique. Orore reste en retrait.</p>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family: var(--font-display); font-size: 3rem; color: var(--ochre); margin-bottom: 0.5rem;">III.</div>
+            <h4 style="margin-bottom: 0.5rem;">La classe questionne</h4>
+            <p style="color: var(--ink-soft);">À la fin, les camarades posent des questions à voix haute. Orore répond pour celles que l'enfant ne sait pas.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>Orore — outil pédagogique interactif</p>
+      <p class="display-italic">L'apprentissage qui s'éveille.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

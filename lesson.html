@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leçon — Orore</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Lib YAML parser -->
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <a href="index.html" style="text-decoration:none;">
+          <div class="brand-mark">Orore</div>
+        </a>
+        <div class="brand-tagline">l'apprentissage qui s'éveille</div>
+      </div>
+      <nav class="nav-links">
+        <a href="geo.html">← Carte du monde</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- ENTÊTE LEÇON (rempli dynamiquement) -->
+      <section class="lesson-header">
+        <div class="flag" id="lesson-flag">🇨🇳</div>
+        <h1 id="lesson-title">Chargement…</h1>
+        <p class="lesson-subtitle" id="lesson-subtitle"></p>
+      </section>
+
+      <!-- TOOLBAR -->
+      <div class="lesson-toolbar">
+        <button class="btn btn-outline" id="btn-presentation">🎬 Mode présentation</button>
+        <button class="btn btn-outline" id="btn-download-pdf">📄 Fiche de prépa (PDF)</button>
+        <button class="btn btn-gold" id="btn-launch-qa">🎤 Questions à Orore</button>
+      </div>
+
+      <!-- KEY FACTS -->
+      <section class="key-facts" id="key-facts"></section>
+
+      <!-- CARTE + PANEL HOTSPOT -->
+      <section class="china-section">
+
+        <div class="china-map-container">
+          <h3 style="margin-bottom: 1rem; text-align: center;">Clique sur un point pour explorer</h3>
+
+          <!-- Carte Chine SVG simplifiée avec hotspots -->
+          <svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" id="china-map">
+            <!-- Fond -->
+            <rect width="1000" height="700" fill="#f3ecdd"/>
+
+            <!-- Silhouette Chine simplifiée (forme de "poulet" caractéristique) -->
+            <path d="
+              M 250,200 L 350,170 L 450,150 L 550,130 L 650,120 L 750,140 L 820,180
+              L 870,230 L 880,290 L 850,350 L 820,400 L 800,450 L 780,500 L 730,540
+              L 670,560 L 600,540 L 540,520 L 480,540 L 420,560 L 360,540 L 320,490
+              L 290,440 L 270,380 L 250,320 L 240,260 Z"
+              fill="#e8c896"
+              stroke="#9a5f1a"
+              stroke-width="2"
+              opacity="0.8" />
+
+            <!-- Mer (à droite) -->
+            <path d="
+              M 880,290 L 950,300 L 970,400 L 950,500 L 900,550 L 830,560 L 800,510
+              L 820,450 L 850,400 L 870,340 Z"
+              fill="#a8c5d8"
+              opacity="0.5" />
+
+            <!-- Étiquettes géographiques discrètes -->
+            <text x="550" y="170" font-family="Fraunces" font-style="italic" font-size="13" fill="#9a5f1a" opacity="0.5">Mongolie</text>
+            <text x="920" y="450" font-family="Fraunces" font-style="italic" font-size="13" fill="#3a6480" opacity="0.6">Mer de Chine</text>
+
+            <!-- HOTSPOTS — générés dynamiquement par lesson-engine.js -->
+            <g id="hotspots-layer"></g>
+
+          </svg>
+        </div>
+
+        <!-- PANEL CONTENU HOTSPOT -->
+        <aside class="hotspot-panel empty" id="hotspot-panel">
+          <p>✦ Sélectionne un point sur la carte<br>pour découvrir cet endroit ✦</p>
+        </aside>
+
+      </section>
+
+      <!-- ONGLETS : Prononciation / Traditions / Timeline / Quiz -->
+      <section class="tabs-section">
+        <nav class="tabs-nav">
+          <button class="tab-btn active" data-tab="pronunciations">🗣️ Apprendre des mots</button>
+          <button class="tab-btn" data-tab="traditions">🏮 Traditions</button>
+          <button class="tab-btn" data-tab="timeline">📜 Histoire</button>
+          <button class="tab-btn" data-tab="quiz">❓ Quiz pour la classe</button>
+        </nav>
+
+        <div class="tab-content active" id="tab-pronunciations">
+          <p style="text-align:center; margin-bottom:1.5rem; font-style:italic; color:var(--ink-soft);">
+            Quelques mots en chinois — clique pour écouter la prononciation
+          </p>
+          <div class="pronunciations-list" id="pronunciations-list"></div>
+        </div>
+
+        <div class="tab-content" id="tab-traditions">
+          <div class="traditions-grid" id="traditions-grid"></div>
+        </div>
+
+        <div class="tab-content" id="tab-timeline">
+          <div class="timeline-container" id="timeline-container"></div>
+        </div>
+
+        <div class="tab-content" id="tab-quiz">
+          <div class="quiz-container" id="quiz-container"></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- MODAL Q&A AVEC ORORE -->
+  <div class="qa-modal" id="qa-modal">
+    <div class="qa-modal-content">
+      <button class="qa-modal-close" id="qa-close" aria-label="Fermer">✕</button>
+
+      <h2>Pose ta question à Orore</h2>
+      <p class="qa-subtitle">Maintiens le bouton, parle, relâche.</p>
+
+      <div class="mic-button" id="mic-btn" role="button" aria-label="Appuie pour parler">🎤</div>
+
+      <p class="mic-instruction" id="mic-instruction">Maintiens le bouton pour parler</p>
+
+      <div class="transcription" id="transcription">
+        <span class="label">Ta question</span>
+        <span id="transcription-text"></span>
+      </div>
+
+      <div class="loading-dots" id="loading-dots" style="display:none;">
+        <span></span><span></span><span></span>
+      </div>
+
+      <div class="qa-answer" id="qa-answer">
+        <span class="label">Orore répond</span>
+        <p id="answer-text"></p>
+      </div>
+
+      <!-- Plan B : taper la question -->
+      <details style="margin-top:1.5rem; text-align:left; font-family:var(--font-sans); font-size:0.9rem;">
+        <summary style="cursor:pointer; color:var(--ink-soft);">Ou tape la question (si le micro ne marche pas)</summary>
+        <div class="qa-text-fallback">
+          <input type="text" id="qa-text-input" placeholder="Écris ta question ici…" />
+          <button class="btn btn-primary" id="qa-text-send">Envoyer</button>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Orore — Leçon de Géographie</p>
+    </div>
+  </footer>
+
+  <script src="js/lesson-engine.js"></script>
+  <script src="js/qa-agent.js"></script>
+
+</body>
+</html>
