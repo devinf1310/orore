@@ -494,18 +494,27 @@ main { padding: 2rem 0 4rem; }
 .china-map-container .label-country {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 13px;
-  fill: #8a7556;
-  opacity: 0.7;
+  font-size: 14px;
+  font-weight: 500;
+  fill: #6a5a3e;
+  stroke: var(--paper);
+  stroke-width: 4px;
+  paint-order: stroke fill;
+  stroke-linejoin: round;
   pointer-events: none;
+  text-anchor: middle;
 }
 .china-map-container .label-sea {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 12px;
-  fill: #5a7a93;
-  opacity: 0.7;
+  font-size: 13px;
+  fill: #3a5a73;
+  stroke: var(--paper);
+  stroke-width: 4px;
+  paint-order: stroke fill;
+  stroke-linejoin: round;
   pointer-events: none;
+  text-anchor: middle;
 }
 
 .hotspot-marker {
