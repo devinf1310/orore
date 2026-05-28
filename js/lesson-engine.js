@@ -3,7 +3,7 @@
 // Charge YAML + SVG carte + remplit tous les onglets
 // ============================================================
 
-console.log("[Orore] lesson-engine.js — v4 chargé (drapeau + galeries)");
+console.log("[Orore] lesson-engine.js — v5 chargé (photos dans les cartes)");
 
 let LESSON_DATA = null;  // Données YAML stockées pour usage global
 
@@ -16,7 +16,7 @@ let LESSON_DATA = null;  // Données YAML stockées pour usage global
     const lessonId = params.get('id') || 'china';
 
     // 1. Charger le YAML (avec cache-busting)
-    const yamlRes = await fetch(`lessons/${lessonId}/config.yaml?v=4`);
+    const yamlRes = await fetch(`lessons/${lessonId}/config.yaml?v=5`);
     if (!yamlRes.ok) throw new Error("YAML introuvable: " + yamlRes.status);
     const data = jsyaml.load(await yamlRes.text());
     LESSON_DATA = data.lesson;
@@ -77,7 +77,7 @@ async function loadFlag() {
   if (!target) return;
 
   try {
-    const res = await fetch('assets/flag-china.svg?v=4');
+    const res = await fetch('assets/flag-china.svg?v=5');
     if (res.ok) {
       target.innerHTML = await res.text();
       const svg = target.querySelector('svg');
@@ -129,7 +129,7 @@ function showFlagDetail() {
   openDetailModal(body);
 
   // Injecte le drapeau en grand dans la popup
-  fetch('assets/flag-china.svg?v=4')
+  fetch('assets/flag-china.svg?v=5')
     .then(r => r.text())
     .then(svg => {
       const target = document.getElementById('flag-large');
@@ -160,7 +160,7 @@ async function loadChinaMap() {
   if (!mapTarget) return;
 
   try {
-    const mapRes = await fetch('assets/china-map.svg?v=4');
+    const mapRes = await fetch('assets/china-map.svg?v=5');
     if (!mapRes.ok) throw new Error("Carte introuvable");
     mapTarget.innerHTML = await mapRes.text();
 
@@ -317,6 +317,9 @@ function fillPersonalities() {
           <div class="personality-card" data-person-id="${p.id}" onclick="showPersonDetail('${p.id}')">
             <div class="personality-photo">
               <div class="photo-placeholder" data-initials="${getInitials(p.name)}"></div>
+              <img src="lessons/china/assets/${p.image}" alt="${p.name}"
+                   onload="this.previousElementSibling.style.display='none'; this.style.display='block';"
+                   onerror="this.style.display='none';" style="display:none;" />
             </div>
             <div class="personality-name">${p.name}</div>
             <div class="personality-role">${p.role}</div>
