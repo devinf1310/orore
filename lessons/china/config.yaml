@@ -13,11 +13,35 @@ lesson:
     headline: "Bienvenue en Chine !"
     subtitle: "Un voyage à travers le plus grand pays d'Asie"
     flag_emoji: "🇨🇳"
+
+    # Détails du drapeau (popup au clic)
+    flag:
+      name: "Drapeau de la République populaire de Chine"
+      adopted: "Adopté le 1er octobre 1949"
+      symbolism:
+        - "Le fond rouge représente la révolution communiste et le courage du peuple."
+        - "La grande étoile dorée symbolise le Parti communiste chinois qui dirige le pays."
+        - "Les quatre petites étoiles représentent le peuple chinois uni autour du Parti."
+        - "La couleur dorée des étoiles évoque la lumière qui éclaire la Chine."
+      fun_fact: "On surnomme ce drapeau le « drapeau aux cinq étoiles » (五星红旗, Wǔxīng Hóngqí)."
+
+    # Hymne national
+    anthem:
+      name: "La Marche des Volontaires"
+      chinese: "义勇军进行曲"
+      pinyin: "Yìyǒngjūn Jìnxíngqǔ"
+      description: "L'hymne national chinois a été écrit en 1935 pendant la guerre. C'est un chant qui appelle le peuple à se lever et à défendre son pays. Il est devenu l'hymne officiel en 1949."
+      # Audio : version instrumentale domaine public (à héberger localement)
+      audio: "anthem.mp3"
+
     key_facts:
       - icon: "👥"
         label: "Habitants"
-        value: "1,4 milliard"
-        comment: "20 fois plus qu'en France"
+        value: "Les Chinois"
+        comment: "1,4 milliard de personnes"
+      - icon: "🌏"
+        label: "Continent"
+        value: "Asie"
       - icon: "🏛️"
         label: "Capitale"
         value: "Pékin"
@@ -27,15 +51,11 @@ lesson:
         comment: "17 fois la France"
       - icon: "🗣️"
         label: "Langue"
-        value: "Mandarin"
-        comment: "La langue la plus parlée au monde"
+        value: "Le chinois"
+        comment: "Le mandarin, langue la plus parlée au monde"
       - icon: "💰"
         label: "Monnaie"
-        value: "Yuan (¥)"
-      - icon: "🏔️"
-        label: "Point culminant"
-        value: "Mont Everest (8 849 m)"
-        comment: "Frontière avec le Népal"
+        value: "Le Yuan (¥)"
 
   # ============================================================
   # HOTSPOTS SUR LA CARTE
@@ -362,6 +382,240 @@ lesson:
         - "Pays de la soie"
       correct: 1
       explanation: "Les Chinois considéraient leur pays comme le centre du monde."
+
+  # ============================================================
+  # GALERIE DE PERSONNAGES CÉLÈBRES (4 thèmes × 3 personnages)
+  # L'enfant choisit celui qu'il veut présenter
+  # ============================================================
+  personalities:
+    themes:
+      - id: histoire
+        title: "Histoire & Politique"
+        icon: "🏛️"
+        people:
+          - id: confucius
+            name: "Confucius"
+            chinese: "孔子"
+            dates: "551 – 479 av. J.-C."
+            image: "confucius.jpg"
+            role: "Sage et philosophe"
+            intro: "Confucius est le plus grand sage de la Chine. Il a vécu il y a plus de 2 500 ans."
+            details:
+              - "Il a enseigné comment bien vivre ensemble, avec respect et bonté."
+              - "Ses idées, appelées le confucianisme, sont encore très importantes en Chine aujourd'hui."
+              - "Il disait : « Choisis un travail que tu aimes et tu n'auras pas à travailler un seul jour de ta vie. »"
+            fun_fact: "Des millions de Chinois suivent encore ses conseils plus de 2 500 ans après sa mort !"
+          - id: qin
+            name: "Qin Shi Huang"
+            chinese: "秦始皇"
+            dates: "259 – 210 av. J.-C."
+            image: "qin_shi_huang.jpg"
+            role: "Premier empereur de Chine"
+            intro: "Qin Shi Huang est le tout premier empereur à avoir unifié la Chine, il y a plus de 2 200 ans."
+            details:
+              - "Il a réuni tous les petits royaumes pour former un seul grand pays : la Chine."
+              - "Il a lancé la construction de la première Grande Muraille."
+              - "Il s'est fait construire un immense tombeau gardé par 8 000 soldats en terre cuite."
+            fun_fact: "Son armée de terre cuite a été découverte par hasard en 1974 par des paysans !"
+          - id: mao
+            name: "Mao Zedong"
+            chinese: "毛泽东"
+            dates: "1893 – 1976"
+            image: "mao.jpg"
+            role: "Fondateur de la Chine moderne"
+            intro: "Mao Zedong a fondé la République populaire de Chine en 1949, le pays tel qu'il existe aujourd'hui."
+            details:
+              - "Il a dirigé la Chine pendant 27 ans."
+              - "Son portrait est encore affiché sur la place Tian'anmen à Pékin."
+              - "C'est un personnage important mais aussi très discuté dans l'histoire."
+            fun_fact: "Son portrait géant sur la place Tian'anmen mesure 6 mètres de haut !"
+
+      - id: arts
+        title: "Arts & Culture"
+        icon: "🎭"
+        people:
+          - id: brucelee
+            name: "Bruce Lee"
+            chinese: "李小龍"
+            dates: "1940 – 1973"
+            image: "bruce_lee.jpg"
+            role: "Maître d'arts martiaux et acteur"
+            intro: "Bruce Lee est la plus grande légende des arts martiaux au cinéma."
+            details:
+              - "Il a fait connaître le kung-fu dans le monde entier grâce à ses films."
+              - "Il a inventé son propre art martial, le Jeet Kune Do."
+              - "Il était incroyablement rapide : on devait ralentir les caméras pour filmer ses mouvements !"
+            fun_fact: "Ses coups étaient si rapides que les caméras normales n'arrivaient pas à les filmer."
+          - id: jackiechan
+            name: "Jackie Chan"
+            chinese: "成龍"
+            dates: "Né en 1954"
+            image: "jackie_chan.jpg"
+            role: "Acteur et cascadeur"
+            intro: "Jackie Chan est un acteur célèbre dans le monde entier pour ses films d'action drôles."
+            details:
+              - "Il réalise lui-même toutes ses cascades, sans doublure !"
+              - "Il mélange les arts martiaux avec l'humour et l'acrobatie."
+              - "Il a tourné dans plus de 150 films."
+            fun_fact: "Il s'est cassé presque tous les os du corps en faisant ses cascades !"
+          - id: langlang
+            name: "Lang Lang"
+            chinese: "郎朗"
+            dates: "Né en 1982"
+            image: "lang_lang.jpg"
+            role: "Pianiste"
+            intro: "Lang Lang est l'un des plus grands pianistes du monde."
+            details:
+              - "Il a commencé le piano à l'âge de 3 ans."
+              - "Il a joué dans les plus grandes salles de concert du monde."
+              - "Il a même joué aux Jeux Olympiques de Pékin en 2008."
+            fun_fact: "Il s'est mis au piano après avoir vu un dessin animé où un chat jouait du piano !"
+
+      - id: sport
+        title: "Sport"
+        icon: "⚽"
+        people:
+          - id: yaoming
+            name: "Yao Ming"
+            chinese: "姚明"
+            dates: "Né en 1980"
+            image: "yao_ming.jpg"
+            role: "Basketteur"
+            intro: "Yao Ming est un basketteur géant qui a joué dans la grande ligue américaine, la NBA."
+            details:
+              - "Il mesure 2,29 mètres : un véritable géant !"
+              - "Il a rendu le basket très populaire en Chine."
+              - "Des millions d'enfants chinois se sont mis au basket grâce à lui."
+            fun_fact: "Il est si grand que sa main peut tenir un ballon de basket comme nous tenons une pomme !"
+          - id: malong
+            name: "Ma Long"
+            chinese: "马龙"
+            dates: "Né en 1988"
+            image: "ma_long.jpg"
+            role: "Champion de tennis de table"
+            intro: "Ma Long est considéré comme le meilleur joueur de tennis de table de tous les temps."
+            details:
+              - "Le tennis de table est le sport national de la Chine."
+              - "Il a gagné de nombreuses médailles d'or aux Jeux Olympiques."
+              - "On le surnomme « le Dragon »."
+            fun_fact: "En Chine, le tennis de table est tellement populaire qu'on y joue dès la maternelle !"
+          - id: lina
+            name: "Li Na"
+            chinese: "李娜"
+            dates: "Née en 1982"
+            image: "li_na.jpg"
+            role: "Championne de tennis"
+            intro: "Li Na est la première joueuse de tennis asiatique à avoir gagné un grand tournoi international."
+            details:
+              - "Elle a gagné Roland-Garros à Paris en 2011 et l'Open d'Australie en 2014."
+              - "Elle a inspiré des millions de jeunes filles en Chine."
+              - "Elle est entrée au Temple de la renommée du tennis."
+            fun_fact: "Sa victoire à Roland-Garros a été regardée par 116 millions de personnes en Chine !"
+
+      - id: sciences
+        title: "Sciences & Exploration"
+        icon: "🔬"
+        people:
+          - id: tuyouyou
+            name: "Tu Youyou"
+            chinese: "屠呦呦"
+            dates: "Née en 1930"
+            image: "tu_youyou.jpg"
+            role: "Scientifique, prix Nobel"
+            intro: "Tu Youyou est une scientifique qui a sauvé des millions de vies grâce à un médicament contre le paludisme."
+            details:
+              - "Elle a découvert un médicament à partir d'une plante chinoise traditionnelle."
+              - "Elle a reçu le prix Nobel de médecine en 2015."
+              - "C'est la première femme chinoise à recevoir un prix Nobel scientifique."
+            fun_fact: "Elle a testé son médicament sur elle-même pour vérifier qu'il était sans danger !"
+          - id: zhangheng
+            name: "Zhang Heng"
+            chinese: "张衡"
+            dates: "78 – 139 ap. J.-C."
+            image: "zhang_heng.jpg"
+            role: "Inventeur et astronome"
+            intro: "Zhang Heng était un savant génial qui a inventé le premier détecteur de tremblements de terre."
+            details:
+              - "Il y a presque 2 000 ans, il a créé une machine qui détectait les séismes."
+              - "Il était aussi astronome et étudiait les étoiles."
+              - "Il a découvert que la Lune brille parce qu'elle reflète la lumière du Soleil."
+            fun_fact: "Son détecteur de séismes ressemblait à un grand vase avec des dragons crachant des billes !"
+          - id: yangliwei
+            name: "Yang Liwei"
+            chinese: "杨利伟"
+            dates: "Né en 1965"
+            image: "yang_liwei.jpg"
+            role: "Premier taïkonaute"
+            intro: "Yang Liwei est le premier Chinois à être allé dans l'espace, en 2003."
+            details:
+              - "On appelle les astronautes chinois des « taïkonautes »."
+              - "Il a fait 14 fois le tour de la Terre en une seule journée !"
+              - "La Chine est devenue le 3e pays à envoyer un homme dans l'espace."
+            fun_fact: "Il a emporté un drapeau chinois et les graines de plantes dans l'espace !"
+
+  # ============================================================
+  # SPÉCIALITÉS CULINAIRES (galerie)
+  # ============================================================
+  cuisine:
+    - id: canard_laque
+      name: "Le canard laqué"
+      chinese: "北京烤鸭"
+      image: "canard_laque.jpg"
+      intro: "Le plat le plus célèbre de Pékin : un canard rôti à la peau croustillante et brillante."
+      details:
+        - "On le mange enroulé dans une petite crêpe avec des légumes."
+        - "C'est un plat de fête, servi dans les grands restaurants."
+      fun_fact: "Les cuisiniers s'entraînent des années pour réussir la peau parfaitement croustillante !"
+    - id: raviolis
+      name: "Les raviolis"
+      chinese: "饺子"
+      pinyin: "Jiǎozi"
+      image: "raviolis.jpg"
+      intro: "Les jiaozi sont de petits raviolis remplis de viande ou de légumes."
+      details:
+        - "On les mange surtout pour le Nouvel An chinois."
+        - "Leur forme rappelle les anciennes pièces de monnaie : ils portent chance !"
+      fun_fact: "Les familles se réunissent pour les préparer ensemble à la main."
+    - id: nouilles
+      name: "Les nouilles"
+      chinese: "面条"
+      pinyin: "Miàntiáo"
+      image: "nouilles.jpg"
+      intro: "Les nouilles chinoises existent depuis plus de 4 000 ans !"
+      details:
+        - "Plus la nouille est longue, plus elle porte chance et longue vie."
+        - "C'est Marco Polo qui les aurait ramenées en Italie."
+      fun_fact: "On ne coupe jamais une nouille en Chine : ça porterait malheur !"
+    - id: riz_cantonais
+      name: "Le riz cantonais"
+      chinese: "炒饭"
+      pinyin: "Chǎofàn"
+      image: "riz_cantonais.jpg"
+      intro: "Du riz sauté avec des œufs, des petits légumes et parfois du jambon."
+      details:
+        - "C'est un plat simple et très populaire dans toute la Chine."
+        - "Chaque région a sa propre recette."
+      fun_fact: "Il a été inventé pour ne pas gaspiller le riz de la veille !"
+    - id: rouleaux
+      name: "Les rouleaux de printemps"
+      chinese: "春卷"
+      pinyin: "Chūnjuǎn"
+      image: "rouleaux_printemps.jpg"
+      intro: "De fins rouleaux croustillants remplis de légumes."
+      details:
+        - "On les mange traditionnellement à la fête du printemps (Nouvel An)."
+        - "Leur couleur dorée rappelle les lingots d'or : richesse et chance !"
+      fun_fact: "Leur nom vient de la fête du printemps où on les mangeait."
+    - id: dim_sum
+      name: "Les dim sum"
+      chinese: "点心"
+      pinyin: "Diǎnxīn"
+      image: "dim_sum.jpg"
+      intro: "Une grande variété de petites bouchées cuites à la vapeur."
+      details:
+        - "On les partage en famille ou entre amis, dans des petits paniers en bambou."
+        - "Le mot « dim sum » signifie « toucher le cœur »."
+      fun_fact: "Dans un repas dim sum, on peut goûter plus de 20 petits plats différents !"
 
   # ============================================================
   # CONTEXTE COMPLET POUR Q&A AGENT IA

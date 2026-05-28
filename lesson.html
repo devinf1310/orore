@@ -33,7 +33,10 @@
     <div class="container">
 
       <section class="lesson-header">
-        <div class="flag" id="lesson-flag">🇨🇳</div>
+        <div class="flag-badge" id="lesson-flag" role="button" title="Clique pour découvrir le drapeau et l'hymne">
+          <div id="flag-svg-target"></div>
+          <span class="flag-hint">Clique sur le drapeau ✦</span>
+        </div>
         <h1 id="lesson-title">Chargement…</h1>
         <p class="lesson-subtitle" id="lesson-subtitle"></p>
       </section>
@@ -67,6 +70,8 @@
       <section class="tabs-section">
         <nav class="tabs-nav">
           <button class="tab-btn active" data-tab="pronunciations">🗣️ Apprendre des mots</button>
+          <button class="tab-btn" data-tab="personalities">👤 Personnages célèbres</button>
+          <button class="tab-btn" data-tab="cuisine">🍜 Spécialités culinaires</button>
           <button class="tab-btn" data-tab="traditions">🏮 Traditions</button>
           <button class="tab-btn" data-tab="timeline">📜 Histoire</button>
           <button class="tab-btn" data-tab="quiz">❓ Quiz pour la classe</button>
@@ -77,6 +82,20 @@
             Quelques mots en chinois — clique pour écouter la prononciation
           </p>
           <div class="pronunciations-list" id="pronunciations-list"></div>
+        </div>
+
+        <div class="tab-content" id="tab-personalities">
+          <p style="text-align:center; margin-bottom:1.5rem; font-style:italic; color:var(--ink-soft);">
+            Choisis le personnage que tu veux présenter — clique pour en savoir plus
+          </p>
+          <div class="personalities-table" id="personalities-table"></div>
+        </div>
+
+        <div class="tab-content" id="tab-cuisine">
+          <p style="text-align:center; margin-bottom:1.5rem; font-style:italic; color:var(--ink-soft);">
+            Découvre les plats chinois — clique pour les détails
+          </p>
+          <div class="cuisine-grid" id="cuisine-grid"></div>
         </div>
 
         <div class="tab-content" id="tab-traditions">
@@ -91,6 +110,14 @@
           <div class="quiz-container" id="quiz-container"></div>
         </div>
       </section>
+
+      <!-- POPUP GÉNÉRIQUE (drapeau, personnage, plat) -->
+      <div class="detail-modal" id="detail-modal">
+        <div class="detail-modal-content">
+          <button class="detail-modal-close" id="detail-close" aria-label="Fermer">✕</button>
+          <div id="detail-modal-body"></div>
+        </div>
+      </div>
 
     </div>
   </main>

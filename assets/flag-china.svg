@@ -1,0 +1,20 @@
+<svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Drapeau de la Chine">
+  <rect width="900" height="600" fill="#de2910"/>
+  <g fill="#ffde00">
+    <!-- Grande étoile -->
+    <path id="big-star" d="M150,60 L177.6,144.9 L266.9,144.9 L194.6,197.4 L222.2,282.3 L150,229.8 L77.8,282.3 L105.4,197.4 L33.1,144.9 L122.4,144.9 Z"/>
+    <!-- 4 petites étoiles, orientées vers la grande -->
+    <g transform="translate(300,60) rotate(23.036) scale(0.333)">
+      <path d="M0,-90 L26.45,-27.81 L93.39,-27.81 L39.47,11.81 L65.92,74 L0,40 L-65.92,74 L-39.47,11.81 L-93.39,-27.81 L-26.45,-27.81 Z"/>
+    </g>
+    <g transform="translate(360,120) rotate(45.870) scale(0.333)">
+      <path d="M0,-90 L26.45,-27.81 L93.39,-27.81 L39.47,11.81 L65.92,74 L0,40 L-65.92,74 L-39.47,11.81 L-93.39,-27.81 L-26.45,-27.81 Z"/>
+    </g>
+    <g transform="translate(360,210) rotate(69.945) scale(0.333)">
+      <path d="M0,-90 L26.45,-27.81 L93.39,-27.81 L39.47,11.81 L65.92,74 L0,40 L-65.92,74 L-39.47,11.81 L-93.39,-27.81 L-26.45,-27.81 Z"/>
+    </g>
+    <g transform="translate(300,270) rotate(20.660) scale(0.333)">
+      <path d="M0,-90 L26.45,-27.81 L93.39,-27.81 L39.47,11.81 L65.92,74 L0,40 L-65.92,74 L-39.47,11.81 L-93.39,-27.81 L-26.45,-27.81 Z"/>
+    </g>
+  </g>
+</svg>

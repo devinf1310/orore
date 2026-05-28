@@ -34,13 +34,19 @@ let LESSON_DATA = null;  // Données YAML stockées pour usage global
 
     // 5. Remplir tous les onglets
     fillPronunciations();
+    fillPersonalities();
+    fillCuisine();
     fillTraditions();
     fillTimeline();
     fillQuiz();
 
+    // 5b. Charger le drapeau SVG + brancher le popup
+    await loadFlag();
+
     // 6. Brancher les onglets, le mode présentation, etc.
     setupTabs();
     setupPresentationMode();
+    setupDetailModal();
 
     // 7. Convertir les emojis en Twemoji pour rendu uniforme
     convertEmojisToTwemoji();
@@ -59,10 +65,77 @@ let LESSON_DATA = null;  // Données YAML stockées pour usage global
 function fillHeader() {
   document.getElementById('lesson-title').textContent = LESSON_DATA.title;
   document.getElementById('lesson-subtitle').textContent = LESSON_DATA.intro.subtitle;
-  const flagEl = document.getElementById('lesson-flag');
-  if (flagEl && LESSON_DATA.intro.flag_emoji) {
-    flagEl.textContent = LESSON_DATA.intro.flag_emoji;
+  // Le drapeau est chargé séparément en SVG via loadFlag()
+}
+
+// ============================================================
+// DRAPEAU SVG + POPUP (symbolique + hymne)
+// ============================================================
+async function loadFlag() {
+  const target = document.getElementById('flag-svg-target');
+  const badge = document.getElementById('lesson-flag');
+  if (!target) return;
+
+  try {
+    const res = await fetch('assets/flag-china.svg');
+    if (res.ok) {
+      target.innerHTML = await res.text();
+      const svg = target.querySelector('svg');
+      if (svg) { svg.style.width = '100%'; svg.style.height = '100%'; }
+    }
+  } catch (e) {
+    console.warn("[Orore] Drapeau SVG non chargé:", e);
   }
+
+  // Clic → popup drapeau
+  if (badge) {
+    badge.addEventListener('click', showFlagDetail);
+  }
+}
+
+function showFlagDetail() {
+  const flag = LESSON_DATA.intro.flag || {};
+  const anthem = LESSON_DATA.intro.anthem || {};
+
+  const symbolismList = (flag.symbolism || [])
+    .map(s => `<li>${s}</li>`).join('');
+
+  const anthemBlock = anthem.name ? `
+    <div class="anthem-block">
+      <h4>🎵 L'hymne national</h4>
+      <p class="anthem-name">${anthem.name} <span class="anthem-chinese">${anthem.chinese || ''}</span></p>
+      ${anthem.pinyin ? `<p class="pinyin">${anthem.pinyin}</p>` : ''}
+      <p class="anthem-desc">${anthem.description || ''}</p>
+      <audio controls preload="none" class="anthem-audio">
+        <source src="lessons/china/audio/${anthem.audio}" type="audio/mpeg">
+        Ton navigateur ne peut pas lire l'audio.
+      </audio>
+      <p class="anthem-note">✦ Si l'hymne ne se lance pas, le fichier audio n'est pas encore ajouté.</p>
+    </div>
+  ` : '';
+
+  const body = `
+    <div class="flag-detail">
+      <div class="flag-large" id="flag-large"></div>
+      <h3>${flag.name || 'Le drapeau'}</h3>
+      ${flag.adopted ? `<p class="flag-adopted">${flag.adopted}</p>` : ''}
+      <h4>Que signifie ce drapeau ?</h4>
+      <ul class="flag-symbolism">${symbolismList}</ul>
+      ${flag.fun_fact ? `<div class="anecdote">${flag.fun_fact}</div>` : ''}
+      ${anthemBlock}
+    </div>
+  `;
+
+  openDetailModal(body);
+
+  // Injecte le drapeau en grand dans la popup
+  fetch('assets/flag-china.svg')
+    .then(r => r.text())
+    .then(svg => {
+      const target = document.getElementById('flag-large');
+      if (target) target.innerHTML = svg;
+    })
+    .catch(() => {});
 }
 
 function fillKeyFacts() {
@@ -225,8 +298,179 @@ if ('speechSynthesis' in window) {
 }
 
 // ============================================================
-// ONGLET TRADITIONS
+// ONGLET PERSONNAGES — Tableau 4 colonnes × 3
 // ============================================================
+function fillPersonalities() {
+  const container = document.getElementById('personalities-table');
+  if (!container || !LESSON_DATA.personalities) return;
+
+  const themes = LESSON_DATA.personalities.themes || [];
+
+  container.innerHTML = themes.map(theme => `
+    <div class="personality-column">
+      <div class="personality-column-header">
+        <span class="theme-icon">${theme.icon}</span>
+        <span class="theme-title">${theme.title}</span>
+      </div>
+      <div class="personality-cards">
+        ${theme.people.map(p => `
+          <div class="personality-card" data-person-id="${p.id}" onclick="showPersonDetail('${p.id}')">
+            <div class="personality-photo">
+              <div class="photo-placeholder" data-initials="${getInitials(p.name)}"></div>
+            </div>
+            <div class="personality-name">${p.name}</div>
+            <div class="personality-role">${p.role}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  const tableEl = document.getElementById('personalities-table');
+  if (tableEl) convertEmojisToTwemoji(tableEl);
+}
+
+function getInitials(name) {
+  return name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+}
+
+function findPerson(personId) {
+  for (const theme of (LESSON_DATA.personalities?.themes || [])) {
+    const p = theme.people.find(x => x.id === personId);
+    if (p) return p;
+  }
+  return null;
+}
+
+function showPersonDetail(personId) {
+  const p = findPerson(personId);
+  if (!p) { console.warn("[Orore] Personnage introuvable:", personId); return; }
+
+  const detailsList = (p.details || []).map(d => `<li>${d}</li>`).join('');
+
+  const body = `
+    <div class="person-detail">
+      <div class="person-detail-photo">
+        <div class="photo-placeholder-large" data-initials="${getInitials(p.name)}"></div>
+        <img src="lessons/china/assets/${p.image}" alt="${p.name}"
+             onload="this.previousElementSibling.style.display='none'; this.style.display='block';"
+             onerror="this.style.display='none';" style="display:none;" />
+      </div>
+      <div class="person-detail-info">
+        <h3>${p.name}</h3>
+        ${p.chinese ? `<div class="chinese-name">${p.chinese}</div>` : ''}
+        <div class="person-role">${p.role} · ${p.dates}</div>
+        <p class="intro-text">${p.intro}</p>
+        <ul class="key-points">${detailsList}</ul>
+        ${p.fun_fact ? `<div class="anecdote">${p.fun_fact}</div>` : ''}
+        <button class="btn btn-gold" style="margin-top:1rem;" onclick="choosePerson('${p.id}')">
+          ⭐ Je choisis ${p.name} pour mon exposé
+        </button>
+      </div>
+    </div>
+  `;
+  openDetailModal(body);
+}
+
+function choosePerson(personId) {
+  const p = findPerson(personId);
+  if (!p) return;
+  try { localStorage.setItem('orore_chosen_person', personId); } catch(e) {}
+  closeDetailModal();
+  // Petit feedback
+  alert(`Super choix ! Tu vas présenter ${p.name}. N'oublie pas de le noter sur ta fiche !`);
+}
+
+// ============================================================
+// ONGLET CUISINE — Galerie de plats
+// ============================================================
+function fillCuisine() {
+  const container = document.getElementById('cuisine-grid');
+  if (!container || !LESSON_DATA.cuisine) return;
+
+  container.innerHTML = LESSON_DATA.cuisine.map(dish => `
+    <div class="cuisine-card" onclick="showDishDetail('${dish.id}')">
+      <div class="cuisine-photo">
+        <div class="photo-placeholder" data-initials="🍜"></div>
+        <img src="lessons/china/assets/${dish.image}" alt="${dish.name}"
+             onload="this.previousElementSibling.style.display='none'; this.style.display='block';"
+             onerror="this.style.display='none';" style="display:none;" />
+      </div>
+      <div class="cuisine-name">${dish.name}</div>
+      <div class="cuisine-chinese">${dish.chinese || ''}</div>
+    </div>
+  `).join('');
+
+  const grid = document.getElementById('cuisine-grid');
+  if (grid) convertEmojisToTwemoji(grid);
+}
+
+function showDishDetail(dishId) {
+  const dish = (LESSON_DATA.cuisine || []).find(d => d.id === dishId);
+  if (!dish) return;
+
+  const detailsList = (dish.details || []).map(d => `<li>${d}</li>`).join('');
+
+  const body = `
+    <div class="dish-detail">
+      <div class="dish-detail-photo">
+        <div class="photo-placeholder-large" data-initials="🍜"></div>
+        <img src="lessons/china/assets/${dish.image}" alt="${dish.name}"
+             onload="this.previousElementSibling.style.display='none'; this.style.display='block';"
+             onerror="this.style.display='none';" style="display:none;" />
+      </div>
+      <h3>${dish.name}</h3>
+      ${dish.chinese ? `<div class="chinese-name">${dish.chinese}${dish.pinyin ? ' · ' + dish.pinyin : ''}</div>` : ''}
+      <p class="intro-text">${dish.intro}</p>
+      <ul class="key-points">${detailsList}</ul>
+      ${dish.fun_fact ? `<div class="anecdote">${dish.fun_fact}</div>` : ''}
+    </div>
+  `;
+  openDetailModal(body);
+  const modal = document.getElementById('detail-modal');
+  if (modal) convertEmojisToTwemoji(modal);
+}
+
+// ============================================================
+// MODAL GÉNÉRIQUE (drapeau, personnage, plat)
+// ============================================================
+function openDetailModal(htmlContent) {
+  const modal = document.getElementById('detail-modal');
+  const body = document.getElementById('detail-modal-body');
+  if (!modal || !body) return;
+  body.innerHTML = htmlContent;
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetailModal() {
+  const modal = document.getElementById('detail-modal');
+  if (!modal) return;
+  modal.classList.remove('show');
+  document.body.style.overflow = '';
+  // Stoppe tout audio en cours (hymne)
+  const audios = modal.querySelectorAll('audio');
+  audios.forEach(a => { a.pause(); a.currentTime = 0; });
+}
+
+function setupDetailModal() {
+  const modal = document.getElementById('detail-modal');
+  const closeBtn = document.getElementById('detail-close');
+  if (closeBtn) closeBtn.addEventListener('click', closeDetailModal);
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeDetailModal();
+    });
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDetailModal();
+  });
+}
+
+// Expose
+window.showPersonDetail = showPersonDetail;
+window.choosePerson = choosePerson;
+window.showDishDetail = showDishDetail;
 function fillTraditions() {
   const container = document.getElementById('traditions-grid');
   if (!container || !LESSON_DATA.traditions) return;
