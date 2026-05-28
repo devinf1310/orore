@@ -1783,3 +1783,121 @@ body.presentation-mode .hotspot-panel .intro-text { font-size: 1.25rem; }
 @media (max-width: 600px) {
   .change-name-btn .change-name-action { display: none; }
 }
+
+/* ============================================================
+   v10 : Nouveaux jeux (Qui est-ce, Reconnais le plat, Qui suis-je)
+   ============================================================ */
+.picture-game-card { text-align: center; }
+.picture-game-photo {
+  margin: 0 auto 1.25rem;
+  width: 180px;
+  height: 180px;
+}
+.picture-game-photo .photo-placeholder-large,
+.picture-game-photo img {
+  width: 180px;
+  height: 180px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  border: 3px solid var(--ochre-soft);
+  box-shadow: 0 4px 16px var(--shadow);
+}
+
+.picture-game-choices {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.picture-game-choice {
+  padding: 1rem 1.25rem;
+  background: var(--cream);
+  border: 2px solid rgba(26, 31, 46, 0.1);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+  text-align: center;
+}
+.picture-game-choice:hover:not(:disabled) {
+  border-color: var(--ochre);
+  background: rgba(200, 132, 42, 0.08);
+  transform: translateY(-2px);
+}
+.picture-game-choice:disabled { cursor: not-allowed; opacity: 0.7; }
+.picture-game-choice.correct {
+  border-color: var(--jade);
+  background: rgba(45, 95, 76, 0.15);
+  font-weight: 600;
+  color: var(--jade);
+}
+.picture-game-choice.wrong {
+  border-color: var(--terracotta);
+  background: rgba(184, 92, 60, 0.15);
+  color: var(--terracotta);
+}
+
+/* Grille des plats (4 photos cliquables) */
+.dish-game-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  max-width: 480px;
+  margin: 0 auto 1rem;
+}
+.dish-game-choice {
+  padding: 0.5rem;
+  background: var(--cream);
+  border: 3px solid rgba(26, 31, 46, 0.1);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+.dish-game-choice:hover:not(:disabled) {
+  border-color: var(--ochre);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px var(--shadow);
+}
+.dish-game-choice:disabled { cursor: not-allowed; opacity: 0.6; }
+.dish-game-choice.correct {
+  border-color: var(--jade);
+  box-shadow: 0 0 0 4px rgba(45, 95, 76, 0.25);
+}
+.dish-game-choice.wrong {
+  border-color: var(--terracotta);
+}
+
+/* Carte "Qui suis-je ?" */
+.whoami-card { text-align: center; max-width: 600px; margin: 0 auto; }
+.whoami-bubble {
+  background: rgba(200, 132, 42, 0.10);
+  border: 2px dashed var(--ochre-soft);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+.whoami-bubble .bubble-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ochre-dark);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.whoami-bubble p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+@media (max-width: 500px) {
+  .picture-game-choices { grid-template-columns: 1fr; }
+  .dish-game-grid { grid-template-columns: 1fr 1fr; }
+}

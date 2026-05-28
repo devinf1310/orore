@@ -3,7 +3,7 @@
 // Charge YAML + SVG carte + remplit tous les onglets
 // ============================================================
 
-console.log("[Orore] lesson-engine.js — v9 chargé (personnages parlants)");
+console.log("[Orore] lesson-engine.js — v11 chargé (5 jeux)");
 
 let LESSON_DATA = null;  // Données YAML stockées pour usage global
 
@@ -16,7 +16,7 @@ let LESSON_DATA = null;  // Données YAML stockées pour usage global
     const lessonId = params.get('id') || 'china';
 
     // 1. Charger le YAML (avec cache-busting)
-    const yamlRes = await fetch(`lessons/${lessonId}/config.yaml?v=9`);
+    const yamlRes = await fetch(`lessons/${lessonId}/config.yaml?v=11`);
     if (!yamlRes.ok) throw new Error("YAML introuvable: " + yamlRes.status);
     const data = jsyaml.load(await yamlRes.text());
     LESSON_DATA = data.lesson;
@@ -77,7 +77,7 @@ async function loadFlag() {
   if (!target) return;
 
   try {
-    const res = await fetch('assets/flag-china.svg?v=9');
+    const res = await fetch('assets/flag-china.svg?v=11');
     if (res.ok) {
       target.innerHTML = await res.text();
       const svg = target.querySelector('svg');
@@ -129,7 +129,7 @@ function showFlagDetail() {
   openDetailModal(body);
 
   // Injecte le drapeau en grand dans la popup
-  fetch('assets/flag-china.svg?v=9')
+  fetch('assets/flag-china.svg?v=11')
     .then(r => r.text())
     .then(svg => {
       const target = document.getElementById('flag-large');
@@ -160,7 +160,7 @@ async function loadChinaMap() {
   if (!mapTarget) return;
 
   try {
-    const mapRes = await fetch('assets/china-map.svg?v=9');
+    const mapRes = await fetch('assets/china-map.svg?v=11');
     if (!mapRes.ok) throw new Error("Carte introuvable");
     mapTarget.innerHTML = await mapRes.text();
 
@@ -664,11 +664,23 @@ function setupTabs() {
 
       // Initialise les jeux à la première ouverture de l'onglet
       if (target === 'games') {
+        // Passe les données YAML aux jeux qui en ont besoin
+        if (typeof setLessonData === 'function') setLessonData(LESSON_DATA);
+
         if (typeof initGeoGame === 'function' && !document.querySelector('#geo-game-map svg')) {
           initGeoGame();
         }
         if (typeof initPlaceGame === 'function' && !document.querySelector('#place-game-map svg')) {
           initPlaceGame();
+        }
+        if (typeof initPersonGame === 'function' && !document.querySelector('#person-game-container .picture-game-card, #person-game-container .game-feedback')) {
+          initPersonGame();
+        }
+        if (typeof initDishGame === 'function' && !document.querySelector('#dish-game-container .dish-game-grid, #dish-game-container .game-feedback')) {
+          initDishGame();
+        }
+        if (typeof initWhoamiGame === 'function' && !document.querySelector('#whoami-game-container .whoami-card, #whoami-game-container .game-feedback')) {
+          initWhoamiGame();
         }
       }
     });
