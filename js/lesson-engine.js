@@ -1,9 +1,9 @@
 // ============================================================
-// lesson-engine.js — Version complète (livraison 3)
+// lesson-engine.js — Version v4 (drapeau + galeries + cache-busting)
 // Charge YAML + SVG carte + remplit tous les onglets
 // ============================================================
 
-console.log("[Orore] lesson-engine.js — v3 chargé");
+console.log("[Orore] lesson-engine.js — v4 chargé (drapeau + galeries)");
 
 let LESSON_DATA = null;  // Données YAML stockées pour usage global
 
@@ -15,8 +15,8 @@ let LESSON_DATA = null;  // Données YAML stockées pour usage global
     const params = new URLSearchParams(window.location.search);
     const lessonId = params.get('id') || 'china';
 
-    // 1. Charger le YAML
-    const yamlRes = await fetch(`lessons/${lessonId}/config.yaml`);
+    // 1. Charger le YAML (avec cache-busting)
+    const yamlRes = await fetch(`lessons/${lessonId}/config.yaml?v=4`);
     if (!yamlRes.ok) throw new Error("YAML introuvable: " + yamlRes.status);
     const data = jsyaml.load(await yamlRes.text());
     LESSON_DATA = data.lesson;
@@ -77,7 +77,7 @@ async function loadFlag() {
   if (!target) return;
 
   try {
-    const res = await fetch('assets/flag-china.svg');
+    const res = await fetch('assets/flag-china.svg?v=4');
     if (res.ok) {
       target.innerHTML = await res.text();
       const svg = target.querySelector('svg');
@@ -129,7 +129,7 @@ function showFlagDetail() {
   openDetailModal(body);
 
   // Injecte le drapeau en grand dans la popup
-  fetch('assets/flag-china.svg')
+  fetch('assets/flag-china.svg?v=4')
     .then(r => r.text())
     .then(svg => {
       const target = document.getElementById('flag-large');
@@ -160,7 +160,7 @@ async function loadChinaMap() {
   if (!mapTarget) return;
 
   try {
-    const mapRes = await fetch('assets/china-map.svg');
+    const mapRes = await fetch('assets/china-map.svg?v=4');
     if (!mapRes.ok) throw new Error("Carte introuvable");
     mapTarget.innerHTML = await mapRes.text();
 
