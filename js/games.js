@@ -4,7 +4,7 @@
 // Score correct (pénalise les erreurs)
 // ============================================================
 
-console.log("[Orore] games.js — v11 chargé (5 jeux + score corrigé)");
+console.log("[Orore] games.js — v12 chargé (Qui suis-je sans spoiler)");
 
 let LESSON_FOR_GAMES = null;
 function setLessonData(data) { LESSON_FOR_GAMES = data; }
@@ -37,7 +37,7 @@ async function initGeoGame() {
   `;
 
   try {
-    const res = await fetch('assets/world-map.svg?v=11');
+    const res = await fetch('assets/world-map.svg?v=12');
     const svgText = await res.text();
     const mapDiv = document.getElementById('geo-game-map');
     mapDiv.innerHTML = svgText;
@@ -104,7 +104,7 @@ async function initPlaceGame() {
   `;
 
   try {
-    const res = await fetch('assets/china-map.svg?v=11');
+    const res = await fetch('assets/china-map.svg?v=12');
     const svgText = await res.text();
     const mapDiv = document.getElementById('place-game-map');
     mapDiv.innerHTML = svgText;
@@ -462,7 +462,7 @@ function renderWhoamiQuestion() {
     <div class="whoami-card">
       <div class="whoami-bubble">
         <span class="bubble-label">Mystère…</span>
-        <p>« ${q.target.intro} »</p>
+        <p>« ${q.target.riddle || q.target.intro} »</p>
       </div>
       <div class="picture-game-choices">
         ${q.choices.map(c => `
