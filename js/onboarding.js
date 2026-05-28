@@ -2,7 +2,7 @@
 // onboarding.js — Popup prénom + tour guidé (v6)
 // ============================================================
 
-console.log("[Orore] onboarding.js — v6 chargé");
+console.log("[Orore] onboarding.js — v7 chargé");
 
 const ORORE_NAME_KEY = 'orore_child_name';
 const ORORE_TOUR_KEY = 'orore_tour_done';
@@ -20,8 +20,12 @@ function applyChildName() {
   const name = getChildName();
   document.querySelectorAll('[data-name-target]').forEach(el => {
     const template = el.getAttribute('data-name-template') || '';
+    const fallback = el.getAttribute('data-name-fallback');
     if (name) {
       el.textContent = template.replace('{name}', name);
+      el.style.display = '';
+    } else if (fallback !== null) {
+      el.textContent = fallback;
       el.style.display = '';
     } else {
       el.style.display = 'none';
@@ -46,8 +50,8 @@ function showNamePopup() {
   overlay.innerHTML = `
     <div class="onboarding-card">
       <div class="onboarding-orore">✨</div>
-      <h2>Bonjour ! Moi c'est Orore.</h2>
-      <p class="onboarding-sub">Je vais t'aider à préparer ton exposé sur la Chine.<br>Et toi, comment tu t'appelles ?</p>
+      <h2>Bienvenue sur Orore !</h2>
+      <p class="onboarding-sub">Je vais t'accompagner pour préparer ton exposé.<br>Comment tu t'appelles ?</p>
       <input type="text" id="child-name-input" class="onboarding-input" placeholder="Ton prénom…" maxlength="20" autocomplete="off" />
       <button class="btn btn-gold onboarding-btn" id="name-submit">C'est parti ! ✦</button>
       <button class="onboarding-skip" id="name-skip">Passer</button>

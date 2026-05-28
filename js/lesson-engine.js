@@ -3,7 +3,7 @@
 // Charge YAML + SVG carte + remplit tous les onglets
 // ============================================================
 
-console.log("[Orore] lesson-engine.js — v6 chargé (onboarding + photos)");
+console.log("[Orore] lesson-engine.js — v7 chargé (expose centré enfant)");
 
 let LESSON_DATA = null;  // Données YAML stockées pour usage global
 
@@ -16,7 +16,7 @@ let LESSON_DATA = null;  // Données YAML stockées pour usage global
     const lessonId = params.get('id') || 'china';
 
     // 1. Charger le YAML (avec cache-busting)
-    const yamlRes = await fetch(`lessons/${lessonId}/config.yaml?v=6`);
+    const yamlRes = await fetch(`lessons/${lessonId}/config.yaml?v=7`);
     if (!yamlRes.ok) throw new Error("YAML introuvable: " + yamlRes.status);
     const data = jsyaml.load(await yamlRes.text());
     LESSON_DATA = data.lesson;
@@ -64,7 +64,7 @@ let LESSON_DATA = null;  // Données YAML stockées pour usage global
 // ============================================================
 function fillHeader() {
   document.getElementById('lesson-title').textContent = LESSON_DATA.title;
-  document.getElementById('lesson-subtitle').textContent = LESSON_DATA.intro.subtitle;
+  // Le surtitre "Exposé de {prénom}" est géré par onboarding.js
   // Le drapeau est chargé séparément en SVG via loadFlag()
 }
 
@@ -77,7 +77,7 @@ async function loadFlag() {
   if (!target) return;
 
   try {
-    const res = await fetch('assets/flag-china.svg?v=6');
+    const res = await fetch('assets/flag-china.svg?v=7');
     if (res.ok) {
       target.innerHTML = await res.text();
       const svg = target.querySelector('svg');
@@ -129,7 +129,7 @@ function showFlagDetail() {
   openDetailModal(body);
 
   // Injecte le drapeau en grand dans la popup
-  fetch('assets/flag-china.svg?v=6')
+  fetch('assets/flag-china.svg?v=7')
     .then(r => r.text())
     .then(svg => {
       const target = document.getElementById('flag-large');
@@ -160,7 +160,7 @@ async function loadChinaMap() {
   if (!mapTarget) return;
 
   try {
-    const mapRes = await fetch('assets/china-map.svg?v=6');
+    const mapRes = await fetch('assets/china-map.svg?v=7');
     if (!mapRes.ok) throw new Error("Carte introuvable");
     mapTarget.innerHTML = await mapRes.text();
 

@@ -1382,3 +1382,294 @@ body.presentation-mode .hotspot-panel .intro-text { font-size: 1.25rem; }
 .dish-detail-photo img { object-fit: cover; }
 .dish-detail .key-points { text-align: left; max-width: 480px; margin: 1rem auto; }
 .dish-detail .intro-text { max-width: 520px; margin: 1rem auto; }
+
+/* ============================================================
+   v6 : ONBOARDING (popup prénom + tour guidé)
+   ============================================================ */
+.onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 31, 46, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1.5rem;
+  animation: fadeIn 0.4s var(--ease);
+}
+.onboarding-card {
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.5);
+  animation: popIn 0.5s var(--ease);
+}
+@keyframes popIn {
+  0% { transform: scale(0.85) translateY(20px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+.onboarding-orore {
+  font-size: 3.5rem;
+  margin-bottom: 0.5rem;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.onboarding-card h2 {
+  font-family: var(--font-display);
+  margin-bottom: 0.75rem;
+}
+.onboarding-sub {
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+}
+.onboarding-input {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  text-align: center;
+  border: 2px solid var(--ochre-soft);
+  border-radius: var(--radius-md);
+  background: white;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.2s var(--ease);
+}
+.onboarding-input:focus {
+  outline: none;
+  border-color: var(--ochre);
+}
+.onboarding-btn {
+  width: 100%;
+  justify-content: center;
+  font-size: 1.05rem;
+  padding: 1rem;
+}
+.onboarding-skip {
+  display: block;
+  margin: 1rem auto 0;
+  background: none;
+  color: var(--ink-soft);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  opacity: 0.7;
+}
+.onboarding-skip:hover { opacity: 1; }
+
+/* Tour guidé */
+.tour-spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  pointer-events: auto;
+  cursor: pointer;
+}
+.tour-hole {
+  position: absolute;
+  border-radius: 12px;
+  box-shadow: 0 0 0 9999px rgba(26, 31, 46, 0.82);
+  border: 3px solid var(--gold);
+  transition: all 0.3s var(--ease);
+  pointer-events: none;
+}
+.tour-tooltip {
+  position: fixed;
+  z-index: 1101;
+  background: var(--cream);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  max-width: 340px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  animation: popIn 0.3s var(--ease);
+}
+.tour-step-count {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ochre-dark);
+  margin-bottom: 0.5rem;
+}
+.tour-tooltip h4 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.tour-tooltip p {
+  color: var(--ink-soft);
+  line-height: 1.5;
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+}
+.tour-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.tour-skip-all {
+  background: none;
+  color: var(--ink-soft);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  text-decoration: underline;
+}
+.tour-next { padding: 0.6rem 1.25rem; font-size: 0.9rem; }
+
+/* Salutation personnalisée */
+.child-greeting {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--ochre-dark);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* ============================================================
+   v6 : JEUX CARTE INTERACTIFS
+   ============================================================ */
+.games-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+.game-block {
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  border: 1px solid rgba(26,31,46,0.08);
+}
+.game-intro { text-align: center; margin-bottom: 1rem; }
+.game-intro h3 { margin-bottom: 0.4rem; }
+.game-intro p {
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-style: italic;
+}
+.game-feedback {
+  margin-top: 0.75rem;
+  min-height: 2rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.game-feedback.win .game-win {
+  color: var(--jade);
+  font-weight: 600;
+  font-size: 1.1rem;
+  animation: popIn 0.4s var(--ease);
+}
+.game-feedback.lose .game-lose {
+  color: var(--terracotta);
+  font-weight: 500;
+}
+.game-map {
+  background: var(--paper);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.game-map svg { width: 100%; height: auto; }
+/* Dans les jeux, tous les pays réagissent au survol */
+.game-map .country:hover { fill: var(--ochre-soft); }
+.game-map .hotspot-marker circle.inner { fill: var(--terracotta); }
+.game-map .hotspot-marker:hover circle.inner { fill: var(--ochre-dark); r: 10; }
+
+/* ============================================================
+   v6 : POLISH — animations d'apparition + accents Chine
+   ============================================================ */
+/* Apparition en cascade des key-facts */
+.key-fact {
+  animation: riseUp 0.5s var(--ease) both;
+}
+.key-fact:nth-child(1) { animation-delay: 0.05s; }
+.key-fact:nth-child(2) { animation-delay: 0.10s; }
+.key-fact:nth-child(3) { animation-delay: 0.15s; }
+.key-fact:nth-child(4) { animation-delay: 0.20s; }
+.key-fact:nth-child(5) { animation-delay: 0.25s; }
+.key-fact:nth-child(6) { animation-delay: 0.30s; }
+@keyframes riseUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Apparition des cartes personnages */
+.personality-card, .cuisine-card, .tradition-card {
+  animation: riseUp 0.4s var(--ease) both;
+}
+
+/* Accent thématique Chine : liseré rouge/or en haut de page leçon */
+.lesson-header::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #de2910 0%, #de2910 50%, #ffde00 50%, #ffde00 100%);
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Le drapeau dans l'en-tête : petite animation d'ondulation au survol */
+.flag-badge:hover #flag-svg-target {
+  animation: wave 0.6s var(--ease);
+}
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
+}
+
+/* Hotspots : apparition en fondu */
+.hotspot-marker {
+  animation: fadeIn 0.6s var(--ease) both;
+}
+
+/* Transition douce sur les onglets */
+.tab-btn { position: relative; }
+.tab-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 50%;
+  width: 0; height: 2px;
+  background: var(--ochre);
+  transition: all 0.25s var(--ease);
+  transform: translateX(-50%);
+}
+.tab-btn:hover::after { width: 60%; }
+.tab-btn.active::after { width: 100%; }
+
+/* ============================================================
+   v6b : Surtitre "Exposé de [prénom]"
+   ============================================================ */
+.lesson-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+/* Le titre du pays devient le focus principal */
+.lesson-header h1 {
+  margin-bottom: 0.25rem;
+}
