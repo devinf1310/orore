@@ -3,7 +3,7 @@
 // Charge YAML + SVG carte + remplit tous les onglets
 // ============================================================
 
-console.log("[Orore] lesson-engine.js — v7 chargé (expose centré enfant)");
+console.log("[Orore] lesson-engine.js — v9 chargé (personnages parlants)");
 
 let LESSON_DATA = null;  // Données YAML stockées pour usage global
 
@@ -16,7 +16,7 @@ let LESSON_DATA = null;  // Données YAML stockées pour usage global
     const lessonId = params.get('id') || 'china';
 
     // 1. Charger le YAML (avec cache-busting)
-    const yamlRes = await fetch(`lessons/${lessonId}/config.yaml?v=8`);
+    const yamlRes = await fetch(`lessons/${lessonId}/config.yaml?v=9`);
     if (!yamlRes.ok) throw new Error("YAML introuvable: " + yamlRes.status);
     const data = jsyaml.load(await yamlRes.text());
     LESSON_DATA = data.lesson;
@@ -77,7 +77,7 @@ async function loadFlag() {
   if (!target) return;
 
   try {
-    const res = await fetch('assets/flag-china.svg?v=8');
+    const res = await fetch('assets/flag-china.svg?v=9');
     if (res.ok) {
       target.innerHTML = await res.text();
       const svg = target.querySelector('svg');
@@ -129,7 +129,7 @@ function showFlagDetail() {
   openDetailModal(body);
 
   // Injecte le drapeau en grand dans la popup
-  fetch('assets/flag-china.svg?v=8')
+  fetch('assets/flag-china.svg?v=9')
     .then(r => r.text())
     .then(svg => {
       const target = document.getElementById('flag-large');
@@ -160,7 +160,7 @@ async function loadChinaMap() {
   if (!mapTarget) return;
 
   try {
-    const mapRes = await fetch('assets/china-map.svg?v=8');
+    const mapRes = await fetch('assets/china-map.svg?v=9');
     if (!mapRes.ok) throw new Error("Carte introuvable");
     mapTarget.innerHTML = await mapRes.text();
 
@@ -379,9 +379,40 @@ function choosePerson(personId) {
   const p = findPerson(personId);
   if (!p) return;
   try { localStorage.setItem('orore_chosen_person', personId); } catch(e) {}
-  closeDetailModal();
-  // Petit feedback
-  alert(`Super choix ! Tu vas présenter ${p.name}. N'oublie pas de le noter sur ta fiche !`);
+
+  // Ouvre le popup "le personnage se présente"
+  const audioBlock = p.audio ? `
+    <div class="self-intro-audio">
+      <audio controls preload="none" class="anthem-audio">
+        <source src="lessons/china/audio/${p.audio}" type="audio/mpeg">
+        Ton navigateur ne peut pas lire l'audio.
+      </audio>
+      <p class="anthem-note">✦ Clique sur ▶ pour écouter ${p.name} se présenter</p>
+    </div>
+  ` : '';
+
+  const body = `
+    <div class="self-intro-detail">
+      <div class="self-intro-photo">
+        <div class="photo-placeholder-large" data-initials="${getInitials(p.name)}"></div>
+        <img src="lessons/china/assets/${p.image}" alt="${p.name}"
+             onload="this.previousElementSibling.style.display='none'; this.style.display='block';"
+             onerror="this.style.display='none';" style="display:none;" />
+      </div>
+      <h3>${p.name}</h3>
+      ${p.chinese ? `<div class="chinese-name">${p.chinese}</div>` : ''}
+      <div class="person-role">${p.role} · ${p.dates}</div>
+      <div class="self-intro-bubble">
+        <span class="bubble-label">${p.name} se présente :</span>
+        <p>« ${p.self_intro || p.intro} »</p>
+      </div>
+      ${audioBlock}
+      <div class="self-intro-chosen">⭐ Tu as choisi ${p.name} pour ton exposé !</div>
+    </div>
+  `;
+  openDetailModal(body);
+  const modal = document.getElementById('detail-modal');
+  if (modal) convertEmojisToTwemoji(modal);
 }
 
 // ============================================================
