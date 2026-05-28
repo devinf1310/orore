@@ -3,7 +3,7 @@
 // Charge YAML + SVG carte + remplit tous les onglets
 // ============================================================
 
-console.log("[Orore] lesson-engine.js — v5 chargé (photos dans les cartes)");
+console.log("[Orore] lesson-engine.js — v6 chargé (onboarding + photos)");
 
 let LESSON_DATA = null;  // Données YAML stockées pour usage global
 
@@ -16,7 +16,7 @@ let LESSON_DATA = null;  // Données YAML stockées pour usage global
     const lessonId = params.get('id') || 'china';
 
     // 1. Charger le YAML (avec cache-busting)
-    const yamlRes = await fetch(`lessons/${lessonId}/config.yaml?v=5`);
+    const yamlRes = await fetch(`lessons/${lessonId}/config.yaml?v=6`);
     if (!yamlRes.ok) throw new Error("YAML introuvable: " + yamlRes.status);
     const data = jsyaml.load(await yamlRes.text());
     LESSON_DATA = data.lesson;
@@ -77,7 +77,7 @@ async function loadFlag() {
   if (!target) return;
 
   try {
-    const res = await fetch('assets/flag-china.svg?v=5');
+    const res = await fetch('assets/flag-china.svg?v=6');
     if (res.ok) {
       target.innerHTML = await res.text();
       const svg = target.querySelector('svg');
@@ -129,7 +129,7 @@ function showFlagDetail() {
   openDetailModal(body);
 
   // Injecte le drapeau en grand dans la popup
-  fetch('assets/flag-china.svg?v=5')
+  fetch('assets/flag-china.svg?v=6')
     .then(r => r.text())
     .then(svg => {
       const target = document.getElementById('flag-large');
@@ -160,7 +160,7 @@ async function loadChinaMap() {
   if (!mapTarget) return;
 
   try {
-    const mapRes = await fetch('assets/china-map.svg?v=5');
+    const mapRes = await fetch('assets/china-map.svg?v=6');
     if (!mapRes.ok) throw new Error("Carte introuvable");
     mapTarget.innerHTML = await mapRes.text();
 
@@ -630,6 +630,16 @@ function setupTabs() {
       btn.classList.add('active');
       const tabEl = document.getElementById('tab-' + target);
       if (tabEl) tabEl.classList.add('active');
+
+      // Initialise les jeux à la première ouverture de l'onglet
+      if (target === 'games') {
+        if (typeof initGeoGame === 'function' && !document.querySelector('#geo-game-map svg')) {
+          initGeoGame();
+        }
+        if (typeof initPlaceGame === 'function' && !document.querySelector('#place-game-map svg')) {
+          initPlaceGame();
+        }
+      }
     });
   });
 }
@@ -670,7 +680,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const pdfBtn = document.getElementById('btn-download-pdf');
   if (pdfBtn) {
     pdfBtn.addEventListener('click', () => {
-      alert("La fiche de prépa PDF arrive dans la prochaine livraison ✦\n\nElle sera personnalisée avec ton prénom et contiendra tous les contenus de la leçon, en format imprimable.");
+      if (typeof generateFichePrepa === 'function') {
+        generateFichePrepa();
+      } else {
+        alert("Le générateur de fiche se charge encore, réessaie dans 2 secondes.");
+      }
     });
   }
 });

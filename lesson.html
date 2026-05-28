@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/styles.css?v=5">
+  <link rel="stylesheet" href="css/styles.css?v=6">
 
   <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 </head>
@@ -39,6 +39,7 @@
         </div>
         <h1 id="lesson-title">Chargement…</h1>
         <p class="lesson-subtitle" id="lesson-subtitle"></p>
+        <p class="child-greeting" data-name-target data-name-template="Prêt pour ton exposé, {name} ? ✦" style="display:none;"></p>
       </section>
 
       <div class="lesson-toolbar">
@@ -74,6 +75,7 @@
           <button class="tab-btn" data-tab="cuisine">🍜 Spécialités culinaires</button>
           <button class="tab-btn" data-tab="traditions">🏮 Traditions</button>
           <button class="tab-btn" data-tab="timeline">📜 Histoire</button>
+          <button class="tab-btn" data-tab="games">🎮 Jeux</button>
           <button class="tab-btn" data-tab="quiz">❓ Quiz pour la classe</button>
         </nav>
 
@@ -104,6 +106,13 @@
 
         <div class="tab-content" id="tab-timeline">
           <div class="timeline-container" id="timeline-container"></div>
+        </div>
+
+        <div class="tab-content" id="tab-games">
+          <div class="games-wrapper">
+            <div class="game-block" id="geo-game-container"></div>
+            <div class="game-block" id="place-game-container"></div>
+          </div>
         </div>
 
         <div class="tab-content" id="tab-quiz">
@@ -159,8 +168,14 @@
   <!-- Twemoji : rendu uniforme des emojis (doit être chargé avant lesson-engine) -->
   <script src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
 
-  <script src="js/lesson-engine.js?v=5"></script>
-  <script src="js/qa-agent.js?v=5"></script>
+  <!-- jsPDF pour la génération de la fiche PDF côté navigateur -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script src="js/lesson-engine.js?v=6"></script>
+  <script src="js/qa-agent.js?v=6"></script>
+  <script src="js/onboarding.js?v=6"></script>
+  <script src="js/games.js?v=6"></script>
+  <script src="js/pdf-fiche.js?v=6"></script>
 
 </body>
 </html>
