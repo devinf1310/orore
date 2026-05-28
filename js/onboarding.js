@@ -2,7 +2,7 @@
 // onboarding.js — Popup prénom + tour guidé (v6)
 // ============================================================
 
-console.log("[Orore] onboarding.js — v7 chargé");
+console.log("[Orore] onboarding.js — v10 chargé (bouton changer prénom)");
 
 const ORORE_NAME_KEY = 'orore_child_name';
 const ORORE_TOUR_KEY = 'orore_tour_done';
@@ -31,6 +31,45 @@ function applyChildName() {
       el.style.display = 'none';
     }
   });
+
+  // Affiche ou masque le bouton "Changer de prénom" selon qu'il y a un prénom ou non
+  updateChangeNameButton();
+}
+
+// Crée et gère le bouton "Changer de prénom" dans le header
+function updateChangeNameButton() {
+  const navLinks = document.querySelector('.site-header .nav-links');
+  if (!navLinks) return;
+
+  let btn = document.getElementById('change-name-btn');
+  const name = getChildName();
+
+  if (name) {
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.id = 'change-name-btn';
+      btn.className = 'change-name-btn';
+      btn.innerHTML = `<span class="change-name-current"></span> <span class="change-name-action">Changer</span>`;
+      btn.title = "Changer de prénom (pour un autre enfant)";
+      btn.addEventListener('click', confirmChangeName);
+      navLinks.insertBefore(btn, navLinks.firstChild);
+    }
+    btn.querySelector('.change-name-current').textContent = name;
+    btn.style.display = '';
+  } else if (btn) {
+    btn.style.display = 'none';
+  }
+}
+
+function confirmChangeName() {
+  if (confirm("Veux-tu passer la main à un autre enfant ? Le prénom actuel sera effacé.")) {
+    try {
+      localStorage.removeItem(ORORE_NAME_KEY);
+      localStorage.removeItem(ORORE_TOUR_KEY);
+      localStorage.removeItem('orore_chosen_person');
+    } catch(e) {}
+    location.reload();
+  }
 }
 
 // ============================================================

@@ -1738,3 +1738,48 @@ body.presentation-mode .hotspot-panel .intro-text { font-size: 1.25rem; }
   color: var(--jade);
   font-weight: 500;
 }
+
+/* ============================================================
+   v10 : Bouton "Changer de prénom" dans le header
+   ============================================================ */
+.change-name-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  background: var(--paper);
+  border: 1px solid rgba(26, 31, 46, 0.12);
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+  text-transform: none;
+}
+.change-name-btn:hover {
+  background: var(--ochre-soft);
+  color: var(--ink);
+  border-color: var(--ochre);
+}
+.change-name-btn .change-name-current {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--ochre-dark);
+  font-size: 0.9rem;
+}
+.change-name-btn .change-name-action {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.change-name-btn::before {
+  content: '👤';
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .change-name-btn .change-name-action { display: none; }
+}
