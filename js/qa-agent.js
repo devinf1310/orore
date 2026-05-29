@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btn) {
     btn.addEventListener('click', () => {
       alert(
-        "🎤 Le mode Questions vocales avec Orore arrive dans la prochaine livraison ✦\n
+        "🎤 Le mode Questions vocales avec Orore arrive dans la prochaine livraison ✦\n\n" 
+
       );
     });
   }
