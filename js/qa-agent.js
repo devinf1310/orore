@@ -10,12 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btn) {
     btn.addEventListener('click', () => {
       alert(
-        "🎤 Le mode Questions vocales avec Orore arrive dans la prochaine livraison ✦\n\n" +
-        "Ce mode nécessite :\n" +
-        "• Un backend déployé (FastAPI sur Render)\n" +
-        "• Une clé API OpenAI (GPT-4o-mini)\n" +
-        "• Une clé API ElevenLabs (voix française)\n\n" +
-        "On configure tout ça à la prochaine étape."
+        "🎤 Le mode Questions vocales avec Orore arrive dans la prochaine livraison ✦\n
       );
     });
   }
