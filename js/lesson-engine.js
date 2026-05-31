@@ -16,7 +16,7 @@ let LESSON_DATA = null;  // Données YAML stockées pour usage global
     const lessonId = params.get('id') || 'china';
 
     // 1. Charger le YAML (avec cache-busting)
-    const yamlRes = await fetch(`lessons/${lessonId}/config.yaml?v=11`);
+    const yamlRes = await fetch(`lessons/${lessonId}/config.yaml?v=16`);
     if (!yamlRes.ok) throw new Error("YAML introuvable: " + yamlRes.status);
     const data = jsyaml.load(await yamlRes.text());
     LESSON_DATA = data.lesson;
@@ -37,6 +37,7 @@ let LESSON_DATA = null;  // Données YAML stockées pour usage global
     fillPronunciations();
     fillPersonalities();
     fillCuisine();
+    fillSports();
     fillTraditions();
     fillTimeline();
     fillQuiz();
@@ -78,7 +79,7 @@ async function loadFlag() {
   if (!target) return;
 
   try {
-    const res = await fetch('assets/flag-china.svg?v=11');
+    const res = await fetch('assets/flag-china.svg?v=16');
     if (res.ok) {
       target.innerHTML = await res.text();
       const svg = target.querySelector('svg');
@@ -130,7 +131,7 @@ function showFlagDetail() {
   openDetailModal(body);
 
   // Injecte le drapeau en grand dans la popup
-  fetch('assets/flag-china.svg?v=11')
+  fetch('assets/flag-china.svg?v=16')
     .then(r => r.text())
     .then(svg => {
       const target = document.getElementById('flag-large');
@@ -161,7 +162,7 @@ async function loadChinaMap() {
   if (!mapTarget) return;
 
   try {
-    const mapRes = await fetch('assets/china-map.svg?v=11');
+    const mapRes = await fetch('assets/china-map.svg?v=16');
     if (!mapRes.ok) throw new Error("Carte introuvable");
     mapTarget.innerHTML = await mapRes.text();
 
@@ -506,6 +507,74 @@ function setupDetailModal() {
 window.showPersonDetail = showPersonDetail;
 window.choosePerson = choosePerson;
 window.showDishDetail = showDishDetail;
+
+// ============================================================
+// ONGLET SPORT — Galerie de sports (v16)
+// ============================================================
+function fillSports() {
+  const container = document.getElementById('sports-grid');
+  if (!container || !LESSON_DATA.sports) return;
+
+  const iconBySport = {
+    tennis_table: '🏓',
+    kungfu: '🥋',
+    badminton: '🏸',
+    basket: '🏀',
+  };
+
+  container.innerHTML = LESSON_DATA.sports.map(sport => {
+    const icon = iconBySport[sport.id] || '⚽';
+    return `
+      <div class="sport-card" onclick="showSportDetail('${sport.id}')">
+        <div class="sport-photo">
+          <div class="photo-placeholder" data-initials="${icon}"></div>
+          <img src="lessons/china/assets/sport_${sport.id}.jpg" alt="${sport.name}"
+               onload="this.previousElementSibling.style.display='none'; this.style.display='block';"
+               onerror="this.style.display='none';" style="display:none;" />
+        </div>
+        <div class="sport-name">${sport.name}</div>
+      </div>
+    `;
+  }).join('');
+
+  if (typeof convertEmojisToTwemoji === 'function') {
+    convertEmojisToTwemoji(container);
+  }
+}
+
+function showSportDetail(sportId) {
+  const sport = (LESSON_DATA.sports || []).find(s => s.id === sportId);
+  if (!sport) return;
+
+  const iconBySport = {
+    tennis_table: '🏓',
+    kungfu: '🥋',
+    badminton: '🏸',
+    basket: '🏀',
+  };
+  const icon = iconBySport[sport.id] || '⚽';
+
+  const bulletsList = (sport.bullets || []).map(b => `<li>${b}</li>`).join('');
+
+  const body = `
+    <div class="sport-detail">
+      <div class="sport-detail-photo">
+        <div class="photo-placeholder-large" data-initials="${icon}"></div>
+        <img src="lessons/china/assets/sport_${sport.id}.jpg" alt="${sport.name}"
+             onload="this.previousElementSibling.style.display='none'; this.style.display='block';"
+             onerror="this.style.display='none';" style="display:none;" />
+      </div>
+      <h3>${sport.name}</h3>
+      <ul class="key-points">${bulletsList}</ul>
+    </div>
+  `;
+  openDetailModal(body);
+  const modal = document.getElementById('detail-modal');
+  if (modal && typeof convertEmojisToTwemoji === 'function') convertEmojisToTwemoji(modal);
+}
+
+window.showSportDetail = showSportDetail;
+
 function fillTraditions() {
   const container = document.getElementById('traditions-grid');
   if (!container || !LESSON_DATA.traditions) return;

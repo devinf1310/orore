@@ -2107,3 +2107,60 @@ body.presentation-mode .hotspot-panel .intro-text { font-size: 1.25rem; }
   .prep-form-actions { flex-direction: column-reverse; }
   .prep-form-actions .btn { width: 100%; justify-content: center; }
 }
+/* ============================================================
+   v16 : ONGLET SPORT
+   ============================================================ */
+.sports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+}
+.sport-card {
+  cursor: pointer;
+  text-align: center;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background: var(--cream);
+  border: 1px solid rgba(26,31,46,0.08);
+  transition: all 0.2s var(--ease);
+}
+.sport-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px var(--shadow);
+  border-color: var(--ochre-soft);
+}
+.sport-photo { margin-bottom: 0.75rem; }
+.sport-photo .photo-placeholder,
+.sport-photo img {
+  width: 100%;
+  height: 130px;
+  border-radius: var(--radius-sm);
+}
+.sport-photo .photo-placeholder::after { font-size: 3rem; }
+.sport-photo img { object-fit: cover; }
+.sport-name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+/* Détail sport (popup) */
+.sport-detail { text-align: center; }
+.sport-detail-photo { margin-bottom: 1rem; }
+.sport-detail-photo .photo-placeholder-large,
+.sport-detail-photo img {
+  width: 240px;
+  height: 180px;
+  margin: 0 auto;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--ochre-soft);
+}
+.sport-detail-photo .photo-placeholder-large::after { font-size: 4rem; }
+.sport-detail-photo img { object-fit: cover; }
+.sport-detail h3 { margin: 0.5rem 0 1rem; }
+.sport-detail .key-points {
+  text-align: left;
+  max-width: 480px;
+  margin: 1rem auto;
+}
