@@ -1,10 +1,10 @@
 // ============================================================
-// pdf-fiche.js — Génère la fiche d'exposé PDF multi-pages (v15)
+// pdf-fiche.js — Génère la fiche d'exposé PDF multi-pages (v17)
 // Page 1 : fiche officielle "MON PAYS"
 // Pages 2+ : aide-mémoire en bullets pour présenter sans regarder l'écran
 // ============================================================
 
-console.log("[Orore] pdf-fiche.js — v15 chargé");
+console.log("[Orore] pdf-fiche.js — v17 chargé (sans emojis, contenu enrichi)");
 
 function generateFichePrepa(formData) {
   if (typeof window.jspdf === 'undefined') {
@@ -220,99 +220,114 @@ function drawMiniFlag(doc, x, y, w, h) {
 
 // ============================================================
 // CONSTRUCTION DES SECTIONS D'AIDE-MÉMOIRE
+// Plus de "plan d'exposé" — uniquement des faits utilisables pendant la présentation.
+// Symboles ASCII compatibles PDF (◆ ★ •) à la place des emojis Unicode.
 // ============================================================
 function buildSections(data, picks) {
   const sections = [];
 
-  // 1. Mon plan d'exposé (toujours présent)
+  // ----------------------------------------------------------------
+  // 1. LA CHINE — toujours présent, enrichi
+  // ----------------------------------------------------------------
   sections.push({
-    title: "Mon plan d'exposé",
-    icon: "📋",
+    title: "LA CHINE",
     bullets: [
-      "Je dis bonjour et je présente le pays.",
-      "Je montre où se trouve la Chine sur la carte du monde.",
-      "Je parle des habitants, de la langue et de la monnaie.",
-      "Je présente le lieu ou monument que j'ai choisi.",
-      "Je présente le personnage célèbre que j'ai choisi.",
-      "Je parle d'un plat ou d'une tradition.",
-      "Je parle du sport.",
-      "Je termine et je réponds aux questions de la classe.",
-    ],
-  });
-
-  // 2. La Chine en bref
-  sections.push({
-    title: "La Chine en bref",
-    icon: "🇨🇳",
-    bullets: [
-      "1,4 milliard d'habitants — c'est 20 fois plus qu'en France !",
-      "3ème plus grand pays du monde (17 fois la France).",
-      "Capitale : Pékin. Plus grande ville : Shanghai.",
-      "Langue : le mandarin (aussi appelé « chinois »).",
-      "Monnaie : le Yuan.",
+      "1,4 milliard d'habitants (20 fois plus qu'en France).",
       "Continent : Asie.",
+      "Capitale : Pékin. Plus grande ville : Shanghai.",
+      "Superficie : 9,6 millions de km² (17 fois la France).",
+      "3ème plus grand pays du monde, juste derrière la Russie et le Canada.",
+      "Langue officielle : le mandarin (aussi appelé « chinois ») — la langue la plus parlée au monde.",
+      "Monnaie : le Yuan (¥).",
+      "Drapeau : fond rouge, une grande étoile dorée et quatre petites (adopté en 1949).",
     ],
   });
 
-  // 3. Quelques mots en chinois
+  // ----------------------------------------------------------------
+  // 2. MOTS EN CHINOIS — toujours présent, enrichi
+  // ----------------------------------------------------------------
   sections.push({
-    title: "Quelques mots en chinois",
-    icon: "🗣️",
+    title: "MOTS EN CHINOIS",
     bullets: [
       "Bonjour = Ni hao (nii-haaow)",
       "Merci = Xie xie (chié-chié)",
       "Au revoir = Zai jian (dzai-djienn)",
-      "Chine = Zhongguo (jong-gwo)",
+      "Chine = Zhongguo (jong-gwo) — « le pays du milieu »",
+      "Un, deux, trois = Yi, er, san (yi, èrr, sane)",
+      "Comment tu t'appelles ? = Ni jiao shenme mingzi",
     ],
   });
 
-  // 4. Lieu/monument (si choisi)
+  // ----------------------------------------------------------------
+  // 3. LIEU OU MONUMENT (uniquement si choisi)
+  // ----------------------------------------------------------------
   if (picks.monument) {
     sections.push({
-      title: picks.monument.name,
-      icon: "🏛️",
+      title: picks.monument.name.toUpperCase(),
       bullets: picks.monument.bullets || [],
     });
   }
 
-  // 5. Personnage (si choisi)
+  // ----------------------------------------------------------------
+  // 4. PERSONNAGE CÉLÈBRE (uniquement si choisi)
+  // ----------------------------------------------------------------
   if (picks.personnage) {
     const p = picks.personnage;
     const bullets = [];
-    bullets.push(`${p.role}.`);
-    if (p.dates) bullets.push(`${p.dates}.`);
+    if (p.role && p.dates) {
+      bullets.push(`${p.role} — ${p.dates}.`);
+    } else {
+      if (p.role) bullets.push(`${p.role}.`);
+      if (p.dates) bullets.push(`${p.dates}.`);
+    }
     if (p.intro) bullets.push(p.intro);
     if (p.details && p.details.length) bullets.push(...p.details);
-    if (p.fun_fact) bullets.push(`💡 ${p.fun_fact}`);
+    if (p.fun_fact) bullets.push(`★ Anecdote : ${p.fun_fact}`);
     sections.push({
-      title: p.name,
-      icon: "👤",
+      title: p.name.toUpperCase(),
       bullets,
     });
   }
 
-  // 6. Plat (si choisi)
+  // ----------------------------------------------------------------
+  // 5. PLAT (uniquement si choisi)
+  // ----------------------------------------------------------------
   if (picks.plat) {
     const p = picks.plat;
     const bullets = [];
+    if (p.chinese) bullets.push(`En chinois : ${p.chinese}${p.pinyin ? ' (' + p.pinyin + ')' : ''}.`);
     if (p.intro) bullets.push(p.intro);
     if (p.details && p.details.length) bullets.push(...p.details);
-    if (p.fun_fact) bullets.push(`💡 ${p.fun_fact}`);
+    if (p.fun_fact) bullets.push(`★ Anecdote : ${p.fun_fact}`);
     sections.push({
-      title: p.name,
-      icon: "🍜",
+      title: p.name.toUpperCase(),
       bullets,
     });
   }
 
-  // 7. Sport (si choisi)
+  // ----------------------------------------------------------------
+  // 6. SPORT (uniquement si choisi)
+  // ----------------------------------------------------------------
   if (picks.sport) {
     sections.push({
-      title: picks.sport.name,
-      icon: "⚽",
+      title: picks.sport.name.toUpperCase(),
       bullets: picks.sport.bullets || [],
     });
   }
+
+  // ----------------------------------------------------------------
+  // 7. ÉVÉNEMENT MARQUANT — toujours présent
+  // ----------------------------------------------------------------
+  sections.push({
+    title: "ÉVÉNEMENT MARQUANT",
+    bullets: [
+      "Les Jeux Olympiques de Pékin en 2008.",
+      "Cérémonie d'ouverture spectaculaire suivie par environ 4 milliards de personnes dans le monde.",
+      "La Chine a terminé première au tableau des médailles avec 48 médailles d'or.",
+      "C'était la première fois que la Chine accueillait les Jeux Olympiques.",
+      "★ Lang Lang, le célèbre pianiste chinois, a joué lors de la cérémonie d'ouverture.",
+    ],
+  });
 
   return sections;
 }
@@ -365,11 +380,11 @@ function drawMemoPages(doc, data, sections) {
       y = margin;
     }
 
-    // Titre de section
+    // Titre de section (symbole ASCII ◆ compatible PDF — pas d'emoji)
     doc.setFont(undefined, 'bold');
     doc.setFontSize(SECTION_TITLE_SIZE);
     doc.setTextColor(180, 100, 30); // ocre
-    doc.text(`${section.icon}  ${section.title}`, margin, y);
+    doc.text(`◆  ${section.title}`, margin, y);
     y += 3;
     // Soulignement
     doc.setDrawColor(220, 180, 100);
