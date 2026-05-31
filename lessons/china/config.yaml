@@ -654,6 +654,73 @@ lesson:
       fun_fact: "Dans un repas dim sum, on peut goûter plus de 20 petits plats différents !"
 
   # ============================================================
+  # LIEUX & MONUMENTS (pour le choix dans la fiche d'exposé)
+  # ============================================================
+  monuments:
+    - id: muraille
+      name: "La Grande Muraille de Chine"
+      bullets:
+        - "Le plus grand monument construit par l'homme."
+        - "Plus de 21 000 km de long."
+        - "Sa construction a commencé il y a plus de 2 000 ans."
+        - "Elle servait à protéger la Chine des invasions."
+        - "On peut la voir depuis la Lune, dit-on (en réalité non !)."
+    - id: cite_interdite
+      name: "La Cité Interdite"
+      bullets:
+        - "C'est l'ancien palais des empereurs de Chine."
+        - "Située au cœur de Pékin."
+        - "Elle compte 9 999 pièces !"
+        - "Pendant 500 ans, le peuple ne pouvait pas y entrer."
+        - "Aujourd'hui, c'est un musée visité par des millions de personnes."
+    - id: armee_terre_cuite
+      name: "L'Armée de terre cuite"
+      bullets:
+        - "8 000 soldats grandeur nature en argile."
+        - "Découverte par hasard par des paysans en 1974."
+        - "Elle protège le tombeau du premier empereur, Qin Shi Huang."
+        - "Chaque soldat a un visage différent !"
+        - "Située près de la ville de Xi'an."
+    - id: tiananmen
+      name: "La place Tian'anmen"
+      bullets:
+        - "L'une des plus grandes places du monde."
+        - "Située en plein cœur de Pékin."
+        - "On y trouve le grand portrait de Mao."
+        - "C'est le lieu des grands événements officiels chinois."
+
+  # ============================================================
+  # SPORTS (pour le choix dans la fiche d'exposé)
+  # ============================================================
+  sports:
+    - id: tennis_table
+      name: "Le tennis de table"
+      bullets:
+        - "C'est LE sport national de la Chine !"
+        - "Les Chinois sont les meilleurs au monde."
+        - "On y joue dès la maternelle."
+        - "Ma Long est le plus grand champion chinois."
+    - id: kungfu
+      name: "Le kung-fu"
+      bullets:
+        - "Un art martial né en Chine il y a plus de 1 500 ans."
+        - "Il a été inventé par les moines du temple Shaolin."
+        - "Bruce Lee l'a fait connaître dans le monde entier."
+        - "Le kung-fu travaille le corps ET l'esprit."
+    - id: badminton
+      name: "Le badminton"
+      bullets:
+        - "Très populaire en Chine."
+        - "Les Chinois dominent le badminton aux Jeux Olympiques."
+        - "Le volant peut filer à plus de 400 km/h !"
+    - id: basket
+      name: "Le basket-ball"
+      bullets:
+        - "Sport très aimé en Chine."
+        - "Yao Ming, joueur chinois, a marqué l'histoire de la NBA."
+        - "Il mesure 2,29 m et a inspiré des millions d'enfants."
+
+  # ============================================================
   # CONTEXTE COMPLET POUR Q&A AGENT IA
   # Injecté dans le prompt système de GPT-4o-mini
   # ============================================================

@@ -1910,3 +1910,200 @@ body.presentation-mode .hotspot-panel .intro-text { font-size: 1.25rem; }
   .picture-game-choices { grid-template-columns: 1fr; }
   .dish-game-grid { grid-template-columns: 1fr 1fr; }
 }
+/* ============================================================
+   v15 : FORMULAIRE DE PRÉPARATION (modale)
+   ============================================================ */
+.prep-form-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 31, 46, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  padding: 1.5rem;
+  overflow-y: auto;
+  animation: fadeIn 0.3s var(--ease);
+}
+.prep-form-card {
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  max-width: 680px;
+  width: 100%;
+  max-height: 92vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.5);
+}
+.prep-form-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--ink-soft);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+.prep-form-close:hover { background: rgba(26,31,46,0.08); color: var(--ink); }
+
+.prep-form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.prep-form-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+.prep-form-header p {
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.prep-form fieldset {
+  border: 1px solid rgba(26, 31, 46, 0.1);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin-bottom: 1.25rem;
+  background: rgba(255, 255, 255, 0.4);
+}
+.prep-form legend {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--ochre-dark);
+  padding: 0 0.5rem;
+}
+
+.prep-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.prep-form label {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+.prep-form label.full { display: block; }
+.prep-form label > span {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+.prep-form input[type="text"],
+.prep-form select {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  border: 1.5px solid rgba(26, 31, 46, 0.12);
+  border-radius: var(--radius-sm);
+  background: white;
+  transition: border-color 0.2s var(--ease);
+  box-sizing: border-box;
+}
+.prep-form input[type="text"]:focus,
+.prep-form select:focus {
+  outline: none;
+  border-color: var(--ochre);
+}
+.prep-form .form-hint {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* Auto-complete école */
+.autocomplete-list {
+  position: relative;
+  margin-top: 0.25rem;
+  background: white;
+  border: 1.5px solid rgba(26, 31, 46, 0.12);
+  border-radius: var(--radius-sm);
+  max-height: 240px;
+  overflow-y: auto;
+  display: none;
+  z-index: 10;
+}
+.autocomplete-item {
+  padding: 0.65rem 0.9rem;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(26, 31, 46, 0.05);
+}
+.autocomplete-item:hover { background: var(--paper); }
+.autocomplete-item:last-child { border-bottom: none; }
+.autocomplete-item strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.autocomplete-item small {
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+}
+.autocomplete-loading,
+.autocomplete-empty {
+  padding: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  text-align: center;
+}
+
+/* Section auto */
+.prep-form .auto-section {
+  background: rgba(200, 132, 42, 0.08);
+  border-color: var(--ochre-soft);
+}
+.prep-form .auto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+.prep-form .auto-label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ochre-dark);
+  margin-bottom: 0.2rem;
+}
+
+/* Actions */
+.prep-form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.prep-form-actions .btn {
+  padding: 0.85rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+  .prep-form-card { padding: 1.5rem; }
+  .prep-form .form-row { grid-template-columns: 1fr; }
+  .prep-form .auto-grid { grid-template-columns: 1fr; }
+  .prep-form-actions { flex-direction: column-reverse; }
+  .prep-form-actions .btn { width: 100%; justify-content: center; }
+}

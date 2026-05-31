@@ -37,7 +37,7 @@ async function initGeoGame() {
   `;
 
   try {
-    const res = await fetch('assets/world-map.svg?v=12');
+    const res = await fetch('assets/world-map.svg?v=15');
     const svgText = await res.text();
     const mapDiv = document.getElementById('geo-game-map');
     mapDiv.innerHTML = svgText;
@@ -104,7 +104,7 @@ async function initPlaceGame() {
   `;
 
   try {
-    const res = await fetch('assets/china-map.svg?v=12');
+    const res = await fetch('assets/china-map.svg?v=15');
     const svgText = await res.text();
     const mapDiv = document.getElementById('place-game-map');
     mapDiv.innerHTML = svgText;

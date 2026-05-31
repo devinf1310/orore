@@ -20,6 +20,7 @@ let LESSON_DATA = null;  // Données YAML stockées pour usage global
     if (!yamlRes.ok) throw new Error("YAML introuvable: " + yamlRes.status);
     const data = jsyaml.load(await yamlRes.text());
     LESSON_DATA = data.lesson;
+    window.LESSON_DATA = LESSON_DATA;  // Accessible aux autres modules (prep-form, pdf-fiche)
     console.log("[Orore] YAML chargé:", LESSON_DATA.id, "-", LESSON_DATA.title);
     console.log("[Orore] Hotspots détectés:", (LESSON_DATA.hotspots || []).length);
 
@@ -723,10 +724,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const pdfBtn = document.getElementById('btn-download-pdf');
   if (pdfBtn) {
     pdfBtn.addEventListener('click', () => {
-      if (typeof generateFichePrepa === 'function') {
-        generateFichePrepa();
+      // v15 : ouvre le formulaire de préparation avant de générer le PDF
+      if (typeof openPrepForm === 'function') {
+        openPrepForm();
+      } else if (typeof generateFichePrepa === 'function') {
+        // Fallback : génération directe sans formulaire
+        generateFichePrepa({});
       } else {
-        alert("Le générateur de fiche se charge encore, réessaie dans 2 secondes.");
+        alert("Le formulaire se charge encore, réessaie dans 2 secondes.");
       }
     });
   }
