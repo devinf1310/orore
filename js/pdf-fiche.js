@@ -1,10 +1,10 @@
 // ============================================================
-// pdf-fiche.js — Génère la fiche d'exposé PDF multi-pages (v17)
+// pdf-fiche.js — Génère la fiche d'exposé PDF multi-pages (v18)
 // Page 1 : fiche officielle "MON PAYS"
 // Pages 2+ : aide-mémoire en bullets pour présenter sans regarder l'écran
 // ============================================================
 
-console.log("[Orore] pdf-fiche.js — v17 chargé (sans emojis, contenu enrichi)");
+console.log("[Orore] pdf-fiche.js — v18 chargé (sobre, sans symboles cassés, saut de page corrigé)");
 
 function generateFichePrepa(formData) {
   if (typeof window.jspdf === 'undefined') {
@@ -221,7 +221,8 @@ function drawMiniFlag(doc, x, y, w, h) {
 // ============================================================
 // CONSTRUCTION DES SECTIONS D'AIDE-MÉMOIRE
 // Plus de "plan d'exposé" — uniquement des faits utilisables pendant la présentation.
-// Symboles ASCII compatibles PDF (◆ ★ •) à la place des emojis Unicode.
+// Aucun symbole décoratif (Helvetica ne supporte que latin-1 — pas de ◆ ni ★).
+// Titres en gras + soulignement ocre suffisent.
 // ============================================================
 function buildSections(data, picks) {
   const sections = [];
@@ -282,7 +283,7 @@ function buildSections(data, picks) {
     }
     if (p.intro) bullets.push(p.intro);
     if (p.details && p.details.length) bullets.push(...p.details);
-    if (p.fun_fact) bullets.push(`★ Anecdote : ${p.fun_fact}`);
+    if (p.fun_fact) bullets.push(`Anecdote : ${p.fun_fact}`);
     sections.push({
       title: p.name.toUpperCase(),
       bullets,
@@ -295,10 +296,10 @@ function buildSections(data, picks) {
   if (picks.plat) {
     const p = picks.plat;
     const bullets = [];
-    if (p.chinese) bullets.push(`En chinois : ${p.chinese}${p.pinyin ? ' (' + p.pinyin + ')' : ''}.`);
+    if (p.pinyin) bullets.push(`Nom en chinois : ${p.pinyin}.`);
     if (p.intro) bullets.push(p.intro);
     if (p.details && p.details.length) bullets.push(...p.details);
-    if (p.fun_fact) bullets.push(`★ Anecdote : ${p.fun_fact}`);
+    if (p.fun_fact) bullets.push(`Anecdote : ${p.fun_fact}`);
     sections.push({
       title: p.name.toUpperCase(),
       bullets,
@@ -325,7 +326,7 @@ function buildSections(data, picks) {
       "Cérémonie d'ouverture spectaculaire suivie par environ 4 milliards de personnes dans le monde.",
       "La Chine a terminé première au tableau des médailles avec 48 médailles d'or.",
       "C'était la première fois que la Chine accueillait les Jeux Olympiques.",
-      "★ Lang Lang, le célèbre pianiste chinois, a joué lors de la cérémonie d'ouverture.",
+      "Anecdote : Lang Lang, le célèbre pianiste chinois, a joué lors de la cérémonie d'ouverture.",
     ],
   });
 
@@ -380,11 +381,11 @@ function drawMemoPages(doc, data, sections) {
       y = margin;
     }
 
-    // Titre de section (symbole ASCII ◆ compatible PDF — pas d'emoji)
+    // Titre de section — sobre, sans symbole (Helvetica ne supporte pas Unicode décoratif)
     doc.setFont(undefined, 'bold');
     doc.setFontSize(SECTION_TITLE_SIZE);
     doc.setTextColor(180, 100, 30); // ocre
-    doc.text(`◆  ${section.title}`, margin, y);
+    doc.text(section.title, margin, y);
     y += 3;
     // Soulignement
     doc.setDrawColor(220, 180, 100);
@@ -392,21 +393,26 @@ function drawMemoPages(doc, data, sections) {
     doc.line(margin, y, pageW - margin, y);
     y += SECTION_TITLE_HEIGHT - 3;
 
-    // Bullets
+    // Bullets — chaque bullet est testé EN ENTIER avant écriture pour éviter le bug
+    // d'un bullet coupé en plein milieu entre deux pages.
     doc.setFont(undefined, 'normal');
     doc.setFontSize(BULLET_SIZE);
     doc.setTextColor(30, 30, 50);
-    section.bullets.forEach((bullet, idx) => {
+    section.bullets.forEach((bullet) => {
       const lines = doc.splitTextToSize(bullet, contentW - 8);
+      const bulletHeight = lines.length * BULLET_LINE_HEIGHT;
+
+      // Si le bullet COMPLET ne tient pas, on passe à la page suivante AVANT de l'écrire
+      if (y + bulletHeight > bottomLimit) {
+        doc.addPage();
+        y = margin;
+      }
+
       lines.forEach((line, li) => {
-        // Si on dépasse en plein milieu d'un bullet, on passe à la page suivante
-        if (y > bottomLimit) {
-          doc.addPage();
-          y = margin;
-        }
         if (li === 0) {
+          // Tiret comme puce — caractère latin-1 100% supporté, plus fiable que •
           doc.setTextColor(180, 100, 30);
-          doc.text("•", margin + 2, y);
+          doc.text("-", margin + 2, y);
           doc.setTextColor(30, 30, 50);
         }
         doc.text(line, margin + 8, y);
