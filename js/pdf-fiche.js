@@ -1,10 +1,10 @@
 // ============================================================
-// pdf-fiche.js — Génère la fiche d'exposé PDF multi-pages (v18)
+// pdf-fiche.js — Génère la fiche d'exposé PDF multi-pages (v19)
 // Page 1 : fiche officielle "MON PAYS"
 // Pages 2+ : aide-mémoire en bullets pour présenter sans regarder l'écran
 // ============================================================
 
-console.log("[Orore] pdf-fiche.js — v18 chargé (sobre, sans symboles cassés, saut de page corrigé)");
+console.log("[Orore] pdf-fiche.js — v19 chargé (vraies étoiles à 5 branches sur le drapeau)");
 
 function generateFichePrepa(formData) {
   if (typeof window.jspdf === 'undefined') {
@@ -204,18 +204,52 @@ function drawFichePage(doc, data, picks) {
   doc.text(footer, pageW/2, 285, { align: 'center', maxWidth: 170 });
 }
 
-// Mini drapeau chinois en jsPDF (rectangle rouge + grande étoile)
+// Dessine une étoile à 5 branches remplie dans le PDF
+// cx, cy = centre ; r = rayon externe ; rotation en radians (0 = pointe vers le haut)
+function drawStar(doc, cx, cy, r, rotation) {
+  const rOuter = r;
+  const rInner = r * 0.38;  // ratio standard d'une étoile à 5 branches
+  const points = [];
+  for (let i = 0; i < 10; i++) {
+    const angle = -Math.PI / 2 + (i * Math.PI / 5) + (rotation || 0);
+    const radius = (i % 2 === 0) ? rOuter : rInner;
+    points.push([
+      cx + radius * Math.cos(angle),
+      cy + radius * Math.sin(angle),
+    ]);
+  }
+  // jsPDF.lines() prend des deltas relatifs au point de départ
+  const deltas = [];
+  for (let i = 1; i < points.length; i++) {
+    deltas.push([points[i][0] - points[0][0], points[i][1] - points[0][1]]);
+  }
+  doc.lines(deltas, points[0][0], points[0][1], [1, 1], 'F', true);
+}
+
+// Mini drapeau chinois en jsPDF (rectangle rouge + 1 grande étoile + 4 petites, à 5 branches)
 function drawMiniFlag(doc, x, y, w, h) {
+  // Fond rouge
   doc.setFillColor(222, 41, 16);
   doc.rect(x, y, w, h, 'F');
-  // Une grande étoile jaune simplifiée (cercle approximé)
+
+  // Étoiles dorées (canton supérieur gauche)
   doc.setFillColor(255, 222, 0);
-  doc.circle(x + w * 0.22, y + h * 0.35, 2.5, 'F');
-  // 4 micro-points pour les petites étoiles
-  doc.circle(x + w * 0.40, y + h * 0.18, 0.7, 'F');
-  doc.circle(x + w * 0.48, y + h * 0.30, 0.7, 'F');
-  doc.circle(x + w * 0.48, y + h * 0.48, 0.7, 'F');
-  doc.circle(x + w * 0.40, y + h * 0.60, 0.7, 'F');
+
+  // 1 grande étoile (centre à ~1/6 horizontal, ~1/4 vertical)
+  const bigR = h * 0.18;
+  drawStar(doc, x + w * 0.165, y + h * 0.30, bigR, 0);
+
+  // 4 petites étoiles autour de la grande, orientées vers elle
+  const smallR = h * 0.07;
+  const smallStars = [
+    { dx: 0.30, dy: 0.10, angle: 0.402 },
+    { dx: 0.36, dy: 0.20, angle: 0.802 },
+    { dx: 0.36, dy: 0.35, angle: 1.221 },
+    { dx: 0.30, dy: 0.45, angle: 0.360 },
+  ];
+  smallStars.forEach(s => {
+    drawStar(doc, x + w * s.dx, y + h * s.dy, smallR, s.angle);
+  });
 }
 
 // ============================================================
